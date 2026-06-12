@@ -13,7 +13,7 @@ import { CommonModule, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, NgTemplateOutlet],
+  imports: [FormsModule, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

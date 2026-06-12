@@ -44,6 +44,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           # Puntiamo alla cartella di distribuzione standard generata dagli script di StackBlitz
-          folder: dist/**
+          folder: dist/demo/
           branch: gh-pages
           clean: true

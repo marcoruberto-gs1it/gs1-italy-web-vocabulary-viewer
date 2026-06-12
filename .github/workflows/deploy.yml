@@ -3,7 +3,7 @@ name: Deploy Angular to GitHub Pages
 on:
   push:
     branches:
-      - main  
+      - main  # Cambia in master se il tuo branch principale si chiama master
 
 permissions:
   contents: write
@@ -11,7 +11,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
     
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -26,18 +25,25 @@ jobs:
           node-version: 24
 
       - name: Install Dependencies
-        run: npm install
+        # Usiamo --legacy-peer-deps per evitare blocchi causati da discrepanze di versioni tipiche di StackBlitz
+        run: npm install --legacy-peer-deps
 
       - name: Build Angular Application
-        
-        run: npx ng build --configuration production --base-href /gs1-italy-web-vocabulary-viewer/
+        # Sfruttiamo lo script nativo del package.json per evitare l'Exit Code 3 della CLI
+        run: npm run build -- --base-href /gs1-italy-web-vocabulary-viewer/
 
-      - name: Verify Build Output Directory
-        # Questo comando ci serve per capire nel log l'esatto nome della cartella generata dentro dist
-        run: ls -R dist
+      - name: Verify Content and Find Output Folder
+        # Questo comando elenca i file nel log così vediamo dove Angular ha salvato la build
+        run: |
+          echo "=== Contenuto della root ==="
+          ls -la
+          echo "=== Contenuto di dist (se esiste) ==="
+          ls -R dist || echo "Nessuna cartella dist trovata"
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          # Puntiamo alla cartella di distribuzione standard generata dagli script di StackBlitz
           folder: dist
           branch: gh-pages
+          clean: true

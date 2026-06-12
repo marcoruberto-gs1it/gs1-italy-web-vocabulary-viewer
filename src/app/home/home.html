@@ -1,57 +1,32 @@
 <header class="custom-header">
-  <div
-    class="logo"
-    (click)="resetToHome()"
-    style="display: flex; align-items: center; gap: 15px; cursor: pointer"
+  <div 
+    class="logo" 
+    (click)="resetToHome()" 
     title="Go to Home Page and reset filters"
   >
-    <img
-      src="https://static.gs1it.org/static/images/logo/gs1it.1ea986161973.png"
-      alt="GS1 Italy Logo"
-      style="height: 38px; width: auto; display: block"
-    />
-    <span
-      class="sub-title"
-      style="
-        font-size: 18px;
-        color: var(--gs1-dark-medium-gray);
-        font-weight: 300;
-        border-left: 1px solid var(--gs1-light-medium-gray);
-        padding-left: 15px;
-      "
+    <img 
+      src="https://static.gs1it.org/static/images/logo/gs1it.1ea986161973.png" 
+      alt="GS1 Italy Logo" 
+      class="header-logo-img"
     >
+    <span class="sub-title">
       Web Vocabulary Extension
     </span>
   </div>
-
-  <div
-    style="
-      font-size: 12px;
-      color: var(--gs1-dark-medium-gray);
-      font-family: monospace;
-    "
-  >
-    GS1 Italy Web Vocabulary Viewer v1.6
+  
+  <div class="app-version-title">
+    GS1 Italy Web Vocabulary Viewer v1.7
   </div>
 </header>
 
 <div class="app-container">
+  
   <aside class="sidebar-panel">
+    
     <div class="search-container">
-      <div style="margin-bottom: 8px">
-        <select
-          [(ngModel)]="filterType"
-          style="
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid var(--gs1-dark-medium-gray);
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #fff;
-            color: var(--gs1-dark-gray);
-            cursor: pointer;
-          "
-        >
+      
+      <div class="filter-field-wrapper">
+        <select [(ngModel)]="filterType" class="responsive-select">
           <option value="home">Home Page (All Items)</option>
           <option value="classes">All Classes</option>
           <option value="properties">All Properties</option>
@@ -59,517 +34,197 @@
         </select>
       </div>
 
-      <div style="margin-bottom: 12px">
-        <select
-          [(ngModel)]="filterStatus"
-          style="
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid var(--gs1-dark-medium-gray);
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #fff;
-            color: var(--gs1-dark-gray);
-            cursor: pointer;
-          "
-        >
+      <div class="filter-field-wrapper">
+        <select [(ngModel)]="filterStatus" class="responsive-select">
           <option value="current">Show all current terms</option>
           <option value="all">Show all terms (current or deprecated)</option>
         </select>
       </div>
 
-      <div style="position: relative; display: flex; align-items: center">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          placeholder="Search across all types..."
+      <div class="search-input-wrapper">
+        <input 
+          type="text" 
+          [(ngModel)]="searchQuery" 
+          placeholder="Search across all types..." 
           class="search-input"
         />
         @if (searchQuery()) {
-        <button
-          (click)="clearSearch()"
-          style="
-            position: absolute;
-            right: 10px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--gs1-dark-medium-gray);
-            font-weight: bold;
-          "
-        >
-          ✕
-        </button>
+          <button (click)="clearSearch()" class="search-clear-btn">✕</button>
         }
       </div>
     </div>
 
     <div class="tree-container">
       <h4>Items List ({{ searchResults().length }})</h4>
-      <ul style="padding: 0; list-style: none; margin: 0">
+      <ul class="sidebar-items-list">
         @for (res of searchResults(); track res.id) {
-        <li
-          class="tree-node-wrapper"
-          (click)="selectNode(res)"
-          [class.active]="selectedNode()?.id === res.id"
-        >
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              width: 100%;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                flex-direction: column;
-                overflow: hidden;
-                padding-right: 10px;
-              "
-            >
-              <span
-                class="truncate"
-                style="font-weight: 600; font-size: 14px"
-                [style.textDecoration]="res.status === 'deprecated' ? 'line-through' : 'none'"
-                >{{ res.label }}</span
-              >
-              <span
-                style="
-                  font-size: 10px;
-                  margin-top: 2px;
-                  opacity: 0.8;
-                  font-family: monospace;
-                  text-transform: uppercase;
-                  color: var(--gs1-dark-medium-gray);
-                "
-              >
-                {{ res.type }}
-              </span>
-            </div>
+          <li class="tree-node-wrapper" (click)="selectNode(res)" [class.active]="selectedNode()?.id === res.id">
+            <div class="sidebar-item-row">
+              
+              <div class="sidebar-item-text">
+                <span class="truncate item-main-label" [style.textDecoration]="res.status === 'deprecated' ? 'line-through' : 'none'">{{ res.label }}</span>
+                <span class="item-sub-type">
+                  {{ res.type }}
+                </span>
+              </div>
 
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                flex-shrink: 0;
-              "
-            >
-              @if (res.status === 'deprecated') {
-              <span style="font-size: 10px; color: #e53e3e; line-height: 1"
-                >❌</span
-              >
-              } @if (res.status === 'testing' || res.status === 'draft') {
-              <span
-                style="
-                  background-color: #fff5eb;
-                  color: var(--gs1-orange);
-                  border: 1px solid rgba(255, 130, 0, 0.3);
-                  font-size: 8px;
-                  padding: 2px 4px;
-                  border-radius: 3px;
-                  text-transform: uppercase;
-                  line-height: 1;
-                  display: inline-flex;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
-                {{ res.status === 'testing' ? 'test' : 'draft' }}
-              </span>
-              }
+              <div class="sidebar-item-badges">
+                @if (res.status === 'deprecated') {
+                  <span class="badge-icon-del">❌</span>
+                }
+                @if (res.status === 'testing' || res.status === 'draft') {
+                  <span class="badge-status-alt">
+                    {{ res.status === 'testing' ? 'test' : 'draft' }}
+                  </span>
+                }
+              </div>
+
             </div>
-          </div>
-        </li>
+          </li>
         } @empty {
-        <li
-          style="
-            padding: 20px 10px;
-            text-align: center;
-            color: var(--gs1-dark-medium-gray);
-            font-size: 13px;
-          "
-        >
-          No items found matching the current search/filter.
-        </li>
+          <li class="sidebar-empty-state">
+            No items found matching the current search/filter.
+          </li>
         }
       </ul>
     </div>
   </aside>
 
   <main class="main-content">
+    
     @if (selectedNode()) {
+      
+      <div class="detail-header-row">
+        <h2>{{ selectedNode()?.label }}</h2>
+        <span class="custom-badge" 
+              [class.badge-stable]="selectedNode()?.status === 'stable'" 
+              [class.badge-testing]="selectedNode()?.status === 'testing'"
+              [class.badge-draft]="selectedNode()?.status === 'draft'"
+              [class.badge-deprecated]="selectedNode()?.status === 'deprecated'">
+          {{ selectedNode()?.status }}
+        </span>
+      </div>
 
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 25px;
-      "
-    >
-      <h2 style="margin: 0; color: var(--gs1-blue); font-size: 28px">
-        {{ selectedNode()?.label }}
-      </h2>
-      <span
-        class="custom-badge"
-        [class.badge-stable]="selectedNode()?.status === 'stable'"
-        [class.badge-testing]="selectedNode()?.status === 'testing'"
-        [class.badge-draft]="selectedNode()?.status === 'draft'"
-        [class.badge-deprecated]="selectedNode()?.status === 'deprecated'"
-      >
-        {{ selectedNode()?.status }}
-      </span>
-    </div>
-
-    @if (selectedNode()?.type === 'Class' || selectedNode()?.type ===
-    'CodeList') {
-    <details class="gs1-accordion" open>
-      <summary>Properties defined within {{ selectedNode()?.id }}</summary>
-      <div class="accordion-content">
-        @if (classProperties().length > 0) {
-        <table
-          class="custom-table"
-          style="border: none; border-radius: 0; box-shadow: none"
-        >
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>Expected Type</th>
-              <th>Description & Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (prop of classProperties(); track prop.id) {
-            <tr style="cursor: pointer" (click)="selectNode(prop)">
-              <td style="width: 30%">
-                <span
-                  style="font-weight: 600; color: var(--gs1-blue)"
-                  [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'"
-                  >{{ prop.label }}</span
-                >
-                <span
-                  style="
-                    display: block;
-                    font-family: monospace;
-                    font-size: 11px;
-                    color: var(--gs1-dark-medium-gray);
-                    margin-top: 4px;
-                  "
-                  >{{ prop.id }}</span
-                >
-              </td>
-              <td style="width: 25%">
-                <code
-                  style="
-                    color: var(--gs1-orange);
-                    font-family: monospace;
-                    font-size: 13px;
-                  "
-                  >{{ prop.range }}</code
-                >
-              </td>
-              <td style="color: var(--gs1-dark-gray); line-height: 1.5">
-                {{ prop.comment }}
-              </td>
-            </tr>
+      @if (selectedNode()?.type === 'Class' || selectedNode()?.type === 'CodeList') {
+        <details class="gs1-accordion" open>
+          <summary>Properties defined within {{ selectedNode()?.id }}</summary>
+          <div class="accordion-content table-responsive-wrapper">
+            @if (classProperties().length > 0) {
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>Expected Type</th>
+                    <th>Description & Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (prop of classProperties(); track prop.id) {
+                    <tr (click)="selectNode(prop)">
+                      <td class="col-width-name">
+                        <span class="item-link-label" [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'">{{ prop.label }}</span>
+                        <span class="item-mono-uri">{{ prop.id }}</span>
+                      </td>
+                      <td class="col-width-type">
+                        <code class="orange-code">{{ prop.range }}</code>
+                      </td>
+                      <td>{{ prop.comment }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            } @else {
+              <div class="table-empty-notice">
+                No specific properties declared within this class.
+              </div>
             }
-          </tbody>
-        </table>
-        } @else {
-        <div
-          style="
-            padding: 30px;
-            color: var(--gs1-dark-medium-gray);
-            font-style: italic;
-            text-align: center;
-          "
-        >
-          No specific properties declared within this class.
+          </div>
+        </details>
+      }
+
+      @if (selectedNode()?.type === 'Class' || selectedNode()?.type === 'CodeList') {
+        <details class="gs1-accordion" open>
+          <summary>Properties expecting a value of {{ selectedNode()?.id }}</summary>
+          <div class="accordion-content table-responsive-wrapper">
+            @if (expectedProperties().length > 0) {
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Property</th>
+                    <th>On Types (Domain)</th>
+                    <th>Description & Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (prop of expectedProperties(); track prop.id) {
+                    <tr (click)="selectNode(prop)">
+                      <td class="col-width-name">
+                        <span class="item-link-label" [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'">{{ prop.label }}</span>
+                        <span class="item-mono-uri">{{ prop.id }}</span>
+                      </td>
+                      <td class="col-width-type">
+                        <code class="blue-code">{{ prop.domain }}</code>
+                      </td>
+                      <td>{{ prop.comment }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            } @else {
+              <div class="table-empty-notice">
+                No properties expect this class as a value.
+              </div>
+            }
+          </div>
+        </details>
+      }
+
+      <details class="gs1-accordion" open>
+        <summary>Metadata and relationships</summary>
+        <div class="accordion-content table-responsive-wrapper">
+          <table class="custom-table meta-table">
+            <tbody>
+              <tr><td>URI</td><td><code class="blue-code">{{ selectedNode()?.id }}</code></td></tr>
+              <tr><td>Type</td><td><span class="type-neutral-badge">{{ selectedNode()?.type }}</span></td></tr>
+              <tr><td>Label</td><td class="text-dark-bold">{{ selectedNode()?.label }}</td></tr>
+              <tr><td>Comment</td><td class="text-dark-leading">{{ selectedNode()?.comment }}</td></tr>
+              @if (selectedNode()?.domain) { <tr><td>Domain</td><td><code class="blue-code">{{ selectedNode()?.domain }}</code></td></tr> }
+              @if (selectedNode()?.range) { <tr><td>Range</td><td><code class="orange-code">{{ selectedNode()?.range }}</code></td></tr> }
+              <tr><td>Status</td><td>{{ selectedNode()?.status }}</td></tr>
+            </tbody>
+          </table>
         </div>
-        }
-      </div>
-    </details>
-    } @if (selectedNode()?.type === 'Class' || selectedNode()?.type ===
-    'CodeList') {
-    <details class="gs1-accordion" open>
-      <summary>
-        Properties expecting a value of {{ selectedNode()?.id }}
-      </summary>
-      <div class="accordion-content">
-        @if (expectedProperties().length > 0) {
-        <table
-          class="custom-table"
-          style="border: none; border-radius: 0; box-shadow: none"
-        >
-          <thead>
-            <tr>
-              <th>Property</th>
-              <th>On Types (Domain)</th>
-              <th>Description & Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (prop of expectedProperties(); track prop.id) {
-            <tr style="cursor: pointer" (click)="selectNode(prop)">
-              <td style="width: 30%">
-                <span
-                  style="font-weight: 600; color: var(--gs1-blue)"
-                  [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'"
-                  >{{ prop.label }}</span
-                >
-                <span
-                  style="
-                    display: block;
-                    font-family: monospace;
-                    font-size: 11px;
-                    color: var(--gs1-dark-medium-gray);
-                    margin-top: 4px;
-                  "
-                  >{{ prop.id }}</span
-                >
-              </td>
-              <td style="width: 25%">
-                <code
-                  style="
-                    color: var(--gs1-blue);
-                    font-family: monospace;
-                    font-size: 13px;
-                  "
-                  >{{ prop.domain }}</code
-                >
-              </td>
-              <td style="color: var(--gs1-dark-gray); line-height: 1.5">
-                {{ prop.comment }}
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-        } @else {
-        <div
-          style="
-            padding: 30px;
-            color: var(--gs1-dark-medium-gray);
-            font-style: italic;
-            text-align: center;
-          "
-        >
-          No properties expect this class as a value.
-        </div>
-        }
-      </div>
-    </details>
-    }
-
-    <details class="gs1-accordion" open>
-      <summary>Metadata and relationships</summary>
-      <div class="accordion-content">
-        <table
-          class="custom-table meta-table"
-          style="border: none; border-radius: 0; box-shadow: none"
-        >
-          <tbody>
-            <tr>
-              <td>URI</td>
-              <td>
-                <code style="color: var(--gs1-blue); font-family: monospace"
-                  >{{ selectedNode()?.id }}</code
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>Type</td>
-              <td>
-                <span
-                  class="custom-badge"
-                  style="background: #e2e8f0; color: #334155"
-                  >{{ selectedNode()?.type }}</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>Label</td>
-              <td style="color: var(--gs1-dark-gray); font-weight: 600">
-                {{ selectedNode()?.label }}
-              </td>
-            </tr>
-            <tr>
-              <td>Comment</td>
-              <td style="color: var(--gs1-dark-gray); line-height: 1.5">
-                {{ selectedNode()?.comment }}
-              </td>
-            </tr>
-            @if (selectedNode()?.domain) {
-            <tr>
-              <td>Domain</td>
-              <td>
-                <code style="color: var(--gs1-blue); font-family: monospace"
-                  >{{ selectedNode()?.domain }}</code
-                >
-              </td>
-            </tr>
-            } @if (selectedNode()?.range) {
-            <tr>
-              <td>Range</td>
-              <td>
-                <code style="color: var(--gs1-orange); font-family: monospace"
-                  >{{ selectedNode()?.range }}</code
-                >
-              </td>
-            </tr>
-            }
-            <tr>
-              <td>Status</td>
-              <td>{{ selectedNode()?.status }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
+      </details>
 
     } @else {
+      
+      <div class="welcome-card-wrapper">
+        <h2 class="welcome-title">GS1 Italy Web Vocabulary Explorer</h2>
+        <p class="welcome-description">
+          Welcome to the formal interactive inspector for GS1 Web Vocabulary Extensions managed by GS1 Italy. This semantic engine enables developers, information architects, and retail partners to browse data models, validation constraints, and controlled vocabularies seamlessly.
+        </p>
+        
+        <div class="welcome-cta-group">
+          <button (click)="filterType.set('classes')" class="cta-button">
+            Browse Classes
+          </button>
+          <button (click)="filterType.set('properties')" class="cta-button">
+            Explore Properties
+          </button>
+          <button (click)="filterType.set('codelists')" class="cta-button">
+            View Code Lists
+          </button>
+        </div>
 
-    <div
-      style="
-        padding: 60px 40px;
-        background: #fff;
-        border: 1px solid var(--gs1-light-medium-gray);
-        border-radius: 6px;
-        text-align: center;
-        max-width: 800px;
-        margin: 40px auto 0 auto;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      "
-    >
-      <h2
-        style="
-          color: var(--gs1-blue);
-          margin-top: 0;
-          font-size: 28px;
-          font-weight: 700;
-        "
-      >
-        GS1 Italy Web Vocabulary Explorer
-      </h2>
-      <p
-        style="
-          color: var(--gs1-dark-gray);
-          line-height: 1.7;
-          font-size: 16px;
-          margin-bottom: 35px;
-        "
-      >
-        Welcome to the formal interactive inspector for GS1 Web Vocabulary
-        Extensions managed by GS1 Italy. This semantic engine enables
-        developers, information architects, and retail partners to browse data
-        models, validation constraints, and controlled vocabularies seamlessly.
-      </p>
-
-      <div
-        style="
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-          margin-bottom: 40px;
-        "
-      >
-        <button
-          (click)="filterType.set('classes')"
-          style="
-            background-color: var(--gs1-blue);
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            min-width: 180px;
-          "
-        >
-          Browse Classes
-        </button>
-        <button
-          (click)="filterType.set('properties')"
-          style="
-            background-color: var(--gs1-blue);
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            min-width: 180px;
-          "
-        >
-          Explore Properties
-        </button>
-        <button
-          (click)="filterType.set('codelists')"
-          style="
-            background-color: var(--gs1-blue);
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            min-width: 180px;
-          "
-        >
-          View Code Lists
-        </button>
+        <div class="guidance-section">
+          <h4 class="guidance-title">Quick Navigation Tips:</h4>
+          <ul class="guidance-list">
+            <li>Use the <strong>Search Input Box</strong> inside the sidebar panel to quickly query any concept keyword or full URI path instantly across the entire vocabulary.</li>
+            <li>Click on specific vocabulary items from the list to populate active graph fields, domain ranges, or metadata statuses here in the workspace.</li>
+            <li>Use the top dropdown inside the sidebar to toggle between dedicated asset lists or change the general visibility status filter anytime.</li>
+          </ul>
+        </div>
       </div>
-
-      <div
-        style="
-          border-top: 1px solid #edf2f7;
-          padding-top: 25px;
-          text-align: left;
-        "
-      >
-        <h4
-          style="
-            color: var(--gs1-dark-gray);
-            margin: 0 0 12px 0;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-          "
-        >
-          Quick Navigation Tips:
-        </h4>
-        <ul
-          style="
-            padding-left: 20px;
-            margin: 0;
-            color: var(--gs1-dark-medium-gray);
-            font-size: 14px;
-            line-height: 1.9;
-          "
-        >
-          <li>
-            Use the <strong>Search Input Box</strong> inside the left sidebar to
-            quickly query any concept keyword or full URI path instantly across
-            the entire vocabulary.
-          </li>
-          <li>
-            Click on specific vocabulary items from the list to populate active
-            graph fields, domain ranges, or metadata statuses here in the
-            workspace.
-          </li>
-          <li>
-            Use the top dropdown inside the sidebar to toggle between dedicated
-            asset lists or change the general visibility status filter anytime.
-          </li>
-        </ul>
-      </div>
-    </div>
 
     }
   </main>

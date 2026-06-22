@@ -7,9 +7,10 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { VocNode } from '../models';
+import { VocNode } from '../models'; // Assicurati che il percorso sia corretto in base alla tua alberatura
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +20,12 @@ import { CommonModule, NgTemplateOutlet } from '@angular/common';
 })
 export class Home implements OnInit {
   private http = inject(HttpClient);
-  private dataUrl =
-    'https://raw.githubusercontent.com/gs1-germany/gs1GermanyWebVoc/refs/heads/main/currentVersion/gs1DEWebVoc.jsonld';
+  
+  // URL dei vocabolari da caricare in parallelo
+  private urls = {
+    de: 'https://raw.githubusercontent.com/gs1-germany/gs1GermanyWebVoc/refs/heads/main/currentVersion/gs1DEWebVoc.jsonld',
+    it: 'assets/gs1ITWebVoc.jsonld' // Il tuo file locale per il momento
+  };
 
   allNodes = signal<VocNode[]>([]);
   selectedNode = signal<VocNode | null>(null);
@@ -29,7 +34,7 @@ export class Home implements OnInit {
   filterType = signal<string>('home'); // 'home' = mostra tutto il vocabolario mescolato
   filterStatus = signal<string>('current');
 
-  // RICERCA E FILTRAGGIO DINAMICO (OTTIMIZZATO PER MOSTRARE TUTTO IN HOME)
+  // RICERCA E FILTRAGGIO DINAMICO
   searchResults = computed(() => {
     const query = (this.searchQuery() || '').toLowerCase().trim();
     const typeFilter = this.filterType();
@@ -104,18 +109,32 @@ export class Home implements OnInit {
   });
 
   ngOnInit() {
-    this.http.get<any>(this.dataUrl).subscribe({
-      next: (response) => {
-        const nodes =
-          response['@graph'] || (Array.isArray(response) ? response : []);
+    // forkJoin scarica entrambi i file JSON-LD contemporaneamente
+    forkJoin({
+      deData: this.http.get<any>(this.urls.de),
+      itData: this.http.get<any>(this.urls.it)
+    }).subscribe({
+      next: (responses) => {
+        // Estrai i grafi, gestendo il caso in cui il nodo "@graph" non sia presente
+        const nodesDE = responses.deData['@graph'] || (Array.isArray(responses.deData) ? responses.deData : []);
+        const nodesIT = responses.itData['@graph'] || (Array.isArray(responses.itData) ? responses.itData : []);
+        
+        // Unisci i due vocabolari in un unico array
+        const allRawNodes = [...nodesDE, ...nodesIT];
         const tmpAll: VocNode[] = [];
 
         const extractText = (field: any, fallback: string = ''): string => {
           if (!field) return fallback;
           if (typeof field === 'string') return field;
           if (Array.isArray(field)) {
+            // Se in futuro vorrai dare priorità alla lingua italiana rispetto all'inglese
+            // potresti cercare prima '@language': 'it' e poi fare fallback su 'en'
+            const itStr = field.find((f: any) => f['@language'] === 'it');
+            if (itStr && itStr['@value']) return itStr['@value'];
+
             const enStr = field.find((f: any) => f['@language'] === 'en');
             if (enStr && enStr['@value']) return enStr['@value'];
+            
             if (typeof field[0] === 'string') return field[0];
             if (field[0] && field[0]['@value']) return field[0]['@value'];
           }
@@ -135,7 +154,7 @@ export class Home implements OnInit {
           return undefined;
         };
 
-        nodes.forEach((node: any) => {
+        allRawNodes.forEach((node: any) => {
           if (!node['@id'] || !node['@type']) return;
 
           const rawTypeField = node['@type'];
@@ -178,7 +197,7 @@ export class Home implements OnInit {
               'No description available.'
             ),
             type: cleanType,
-            status: node['sw:term_status'] || 'stable',
+            status: node['sw:term_status'] || node['sw:term_status'] || node['vs:term_status'] || 'stable',
             domain: extractId(node['rdfs:domain']),
             range: extractId(node['rdfs:range']),
             subClassOf: extractId(node['rdfs:subClassOf']),
@@ -190,6 +209,9 @@ export class Home implements OnInit {
         this.allNodes.set(tmpAll);
         this.selectedNode.set(null);
       },
+      error: (err) => {
+        console.error('Errore durante il caricamento dei file JSON-LD:', err);
+      }
     });
   }
 

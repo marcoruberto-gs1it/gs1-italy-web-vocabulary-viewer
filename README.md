@@ -1,6 +1,6 @@
 # GS1 Italy Web Vocabulary Viewer
 
-A dynamic and interactive web application developed in **Angular** designed for inspecting, searching, and navigating semantic web vocabularies and data model extensions based on the **GS1 Web Vocabulary** (JSON-LD) standard.
+A dynamic and interactive web application developed in **Angular** designed for inspecting, searching, and navigating semantic web vocabularies and data model extensions based on the **GS1 Italy Web Vocabulary** (JSON-LD) standard.
 
 Developed to support developers, information architects, and business partners of **GS1 Italy**, this semantic engine offers a fluid and responsive interface to analyze relationship graphs, domain/range validation constraints, and controlled code lists.
 

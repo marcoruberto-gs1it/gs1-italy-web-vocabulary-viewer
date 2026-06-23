@@ -79,6 +79,8 @@ export class Home implements OnInit {
         if (statusFilter === 'current' && prop.status === 'deprecated') return false;
         if (!prop.domain) return false;
 
+        // CRITICAL ANTI-RECURSION: Avoid self-referencing loops if domain equals range
+        if (prop.domain === prop.range) return false;
         if (prop.id === current.id) return false;
 
         const domains = prop.domain.split(',').map(d => d.trim());
@@ -99,6 +101,8 @@ export class Home implements OnInit {
       .filter((prop) => {
         if (statusFilter === 'current' && prop.status === 'deprecated') return false;
 
+        // CRITICAL ANTI-RECURSION: Avoid self-referencing loops if domain equals range
+        if (prop.domain === prop.range) return false;
         if (prop.id === current.id) return false;
 
         return (
@@ -117,11 +121,17 @@ export class Home implements OnInit {
     code += `"${current.label}": {\n  shape: class\n  style.fill: "#edf4ff"\n  style.stroke: "#002c6c"\n}\n`;
 
     this.expectedProperties().forEach(prop => {
+      // Direct guard to prevent links mirroring the active container item
+      if (prop.label === current.label) return;
+      
       code += `"${prop.label}": { shape: parallelogram; style.fill: "#fff3ed"; style.stroke: "#f26322" }\n`;
       code += `"${prop.label}" -> "${current.label}" : domain\n`;
     });
 
     this.classProperties().forEach(prop => {
+      // Direct guard to prevent links mirroring the active container item
+      if (prop.label === current.label) return;
+
       const isDatatype = prop.range?.includes('xsd:') || prop.range?.includes('rdf:');
       const targetShape = isDatatype ? 'cylinder' : 'rectangle';
       code += `"${prop.label}": { shape: ${targetShape}; style.fill: "#f8f9fa"; style.stroke: "#6c757d" }\n`;
@@ -135,13 +145,13 @@ export class Home implements OnInit {
     forkJoin({
       deData: this.http.get<any>(this.urls.de).pipe(
         catchError(err => {
-          console.error('Errore nel caricamento del vocabolario tedesco:', err);
+          console.error('Error loading German vocabulary:', err);
           return of({ '@graph': [] });
         })
       ),
       itData: this.http.get<any>(this.urls.it).pipe(
         catchError(err => {
-          console.error('Errore nel caricamento del vocabolario italiano:', err);
+          console.error('Error loading Italian vocabulary:', err);
           return of({ '@graph': [] });
         })
       )
@@ -223,9 +233,35 @@ export class Home implements OnInit {
 
   selectNodeById(id: string | undefined) {
     if (!id) return;
-    const targetNode = this.allNodes().find(n => n.id === id);
-    if (targetNode) this.selectedNode.set(targetNode);
-    else console.warn(`Node with ID ${id} not found in the graph.`);
+    
+    const cleanId = id.trim();
+    const targetNode = this.allNodes().find(n => n.id === cleanId);
+    if (targetNode) {
+      this.selectedNode.set(targetNode);
+    } else {
+      // Fallback matching logic on sub-tokens to protect user flows
+      const alternativeNode = this.allNodes().find(n => n.id.endsWith(cleanId) || cleanId.endsWith(n.id));
+      if (alternativeNode) {
+        this.selectedNode.set(alternativeNode);
+      } else {
+        console.warn(`Node with ID ${cleanId} not found in the graph.`);
+      }
+    }
+  }
+
+  selectNodeByLabelOrId(searchTerm: string) {
+    if (!searchTerm) return;
+    
+    const targetNode = this.allNodes().find(n => 
+      n.label.toLowerCase().trim() === searchTerm.toLowerCase().trim() ||
+      n.id.toLowerCase().trim() === searchTerm.toLowerCase().trim()
+    );
+
+    if (targetNode) {
+      this.selectedNode.set(targetNode);
+    } else {
+      console.warn(`Node with Label/ID "${searchTerm}" not found in current dictionary.`);
+    }
   }
 
   resetToHome() {

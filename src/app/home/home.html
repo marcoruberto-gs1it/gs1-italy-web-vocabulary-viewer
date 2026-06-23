@@ -133,7 +133,7 @@
           <summary>Network Graph (D2 Visualization)</summary>
           <div class="accordion-content">
             @if (d2GraphCode()) {
-              <app-d2-viewer [d2Code]="d2GraphCode()"></app-d2-viewer>
+              <app-d2-viewer [d2Code]="d2GraphCode()" (nodeClick)="selectNodeByLabelOrId($event)"></app-d2-viewer>
             } @else {
               <div class="table-empty-notice">No semantic relationships to display for this node.</div>
             }

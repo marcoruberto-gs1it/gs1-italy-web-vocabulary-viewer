@@ -194,7 +194,7 @@ body, html {
 }
 .badge-stable { background-color: #d4edda; color: #155724; }
 .badge-testing { background-color: #cce5ff; color: #004085; }
-.badge-draft { background-color: #fff3cd; color: #856404; }
+.badge-stable, .badge-draft { background-color: #fff3cd; color: #856404; }
 .badge-deprecated { background-color: #f8d7da; color: #721c24; text-decoration: line-through; }
 
 /* Accordions */
@@ -245,8 +245,8 @@ body, html {
 .custom-table tbody tr:hover {
   background-color: var(--bg-light);
 }
-.col-width-name { width: 30%; }
-.col-width-type { width: 25%; }
+.col-width-name { width: 35%; }
+.col-width-type { width: 30%; }
 .item-link-label {
   display: block;
   font-weight: 600;
@@ -258,6 +258,7 @@ body, html {
   color: var(--text-muted);
   font-family: monospace;
   margin-top: 4px;
+  word-break: break-all;
 }
 
 /* Code Styles cliccabili */
@@ -266,6 +267,7 @@ code {
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 13px;
+  word-break: break-all;
 }
 .orange-code { background-color: #fff3ed; color: var(--secondary-color); }
 .blue-code { background-color: #edf4ff; color: var(--primary-color); }
@@ -295,7 +297,7 @@ code {
 .text-dark-bold { font-weight: bold; }
 .text-dark-leading { line-height: 1.5; }
 
-/* Welcome Card (Home Dashboard) */
+/* Welcome Card */
 .welcome-card-wrapper {
   background: white;
   padding: 40px;

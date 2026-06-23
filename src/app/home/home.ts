@@ -6,7 +6,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { VocNode } from '../models'; // Verifica che questo path sia corretto nel tuo progetto
+import { VocNode } from '../models';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
@@ -24,7 +24,7 @@ export class Home implements OnInit {
   // Endpoint dei vocabolari da caricare in parallelo
   private urls = {
     de: 'https://raw.githubusercontent.com/gs1-germany/gs1GermanyWebVoc/refs/heads/main/currentVersion/gs1DEWebVoc.jsonld',
-    it: 'assets/voc/gs1ITWebVoc.jsonld' // File locale inserito negli assets dell'applicazione
+    it: 'assets/voc/gs1ITWebVoc.jsonld' // File locale inserito negli assets
   };
 
   allNodes = signal<VocNode[]>([]);
@@ -81,10 +81,14 @@ export class Home implements OnInit {
       .filter((prop) => {
         if (statusFilter === 'current' && prop.status === 'deprecated')
           return false;
+        
+        if (!prop.domain) return false;
+
+        // Gestione dei domini multipli separati da virgola
+        const domains = prop.domain.split(',').map(d => d.trim());
         return (
-          (prop.type === 'DatatypeProperty' ||
-            prop.type === 'ObjectProperty') &&
-          prop.domain === current.id
+          (prop.type === 'DatatypeProperty' || prop.type === 'ObjectProperty') &&
+          domains.includes(current.id)
         );
       })
       .sort((a, b) => a.label.localeCompare(b.label));
@@ -100,8 +104,7 @@ export class Home implements OnInit {
         if (statusFilter === 'current' && prop.status === 'deprecated')
           return false;
         return (
-          (prop.type === 'DatatypeProperty' ||
-            prop.type === 'ObjectProperty') &&
+          (prop.type === 'DatatypeProperty' || prop.type === 'ObjectProperty') &&
           prop.range === current.id
         );
       })
@@ -109,7 +112,6 @@ export class Home implements OnInit {
   });
 
   ngOnInit() {
-    // forkJoin scarica i file in parallelo con paracadute catchError per evitare schermate vuote
     forkJoin({
       deData: this.http.get<any>(this.urls.de).pipe(
         catchError(err => {
@@ -119,7 +121,7 @@ export class Home implements OnInit {
       ),
       itData: this.http.get<any>(this.urls.it).pipe(
         catchError(err => {
-          console.error('Errore nel caricamento del vocabolario italiano (locale):', err);
+          console.error('Errore nel caricamento del vocabolario italiano:', err);
           return of({ '@graph': [] });
         })
       )
@@ -128,7 +130,6 @@ export class Home implements OnInit {
         const nodesDE = responses.deData['@graph'] || (Array.isArray(responses.deData) ? responses.deData : []);
         const nodesIT = responses.itData['@graph'] || (Array.isArray(responses.itData) ? responses.itData : []);
         
-        // Unione a caldo dei due array di nodi semantic-graph
         const allRawNodes = [...nodesDE, ...nodesIT];
         const tmpAll: VocNode[] = [];
 
@@ -136,7 +137,6 @@ export class Home implements OnInit {
           if (!field) return fallback;
           if (typeof field === 'string') return field;
           if (Array.isArray(field)) {
-            // Priorità alla lingua italiana se disponibile, altrimenti ripiega su inglese
             const itStr = field.find((f: any) => f['@language'] === 'it');
             if (itStr && itStr['@value']) return itStr['@value'];
 
@@ -155,8 +155,8 @@ export class Home implements OnInit {
           if (!field) return undefined;
           if (typeof field === 'string') return field;
           if (Array.isArray(field)) {
-            if (typeof field[0] === 'string') return field[0];
-            if (field[0] && field[0]['@id']) return field[0]['@id'];
+            // Unisce i domini multipli separandoli con una virgola
+            return field.map((f: any) => typeof f === 'string' ? f : (f['@id'] || '')).join(', ');
           }
           if (typeof field === 'object' && field['@id']) return field['@id'];
           return undefined;
@@ -188,16 +188,18 @@ export class Home implements OnInit {
             cleanType = 'ObjectProperty';
           else if (
             node['@id'].includes('-') ||
+            node['@id'].includes('#') ||
             rawTypes.some((t) => t.includes('Code'))
           )
             cleanType = 'CodeList';
 
           const item: VocNode = {
             id: node['@id'],
+            // Pulisce l'etichetta rimuovendo i prefissi prima dei ":" e dei "#" se manca rdfs:label
             label: extractText(
               node['rdfs:label'] ||
                 node['skos:prefLabel'] ||
-                node['@id'].split(':').pop(),
+                node['@id'].split(/[:#]/).pop(),
               node['@id']
             ),
             comment: extractText(
@@ -205,7 +207,6 @@ export class Home implements OnInit {
               'No description available.'
             ),
             type: cleanType,
-            // Supporta sia sw:term_status (tedesco) che vs:term_status (italiano)
             status: node['sw:term_status'] || node['vs:term_status'] || 'stable',
             domain: extractId(node['rdfs:domain']),
             range: extractId(node['rdfs:range']),
@@ -225,7 +226,6 @@ export class Home implements OnInit {
     this.selectedNode.set(node);
   }
 
-  // Permette di saltare da una risorsa all'altra cliccando sui domain/range nelle tabelle
   selectNodeById(id: string | undefined) {
     if (!id) return;
     const targetNode = this.allNodes().find(n => n.id === id);

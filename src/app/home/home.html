@@ -162,8 +162,12 @@
                         <span class="item-link-label" [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'">{{ prop.label }}</span>
                         <span class="item-mono-uri">{{ prop.id }}</span>
                       </td>
-                      <td class="col-width-type" (click)="$event.stopPropagation(); selectNodeById(prop.domain)">
-                        <code class="blue-code style-clickable-type" title="Click to view this class details">{{ prop.domain }}</code>
+                      <td class="col-width-type" (click)="$event.stopPropagation()">
+                        @if (prop.domain) {
+                          @for (domId of prop.domain.split(','); track domId) {
+                            <code (click)="selectNodeById(domId.trim())" class="blue-code style-clickable-type" style="margin-right: 4px; display: inline-block;" title="Click to view this class details">{{ domId.trim() }}</code>
+                          }
+                        }
                       </td>
                       <td>{{ prop.comment }}</td>
                     </tr>
@@ -188,7 +192,16 @@
               <tr><td>Type</td><td><span class="type-neutral-badge">{{ selectedNode()?.type }}</span></td></tr>
               <tr><td>Label</td><td class="text-dark-bold">{{ selectedNode()?.label }}</td></tr>
               <tr><td>Comment</td><td class="text-dark-leading">{{ selectedNode()?.comment }}</td></tr>
-              @if (selectedNode()?.domain) { <tr><td>Domain</td><td (click)="selectNodeById(selectedNode()?.domain)"><code class="blue-code style-clickable-type">{{ selectedNode()?.domain }}</code></td></tr> }
+              @if (selectedNode()?.domain) { 
+                <tr>
+                  <td>Domain</td>
+                  <td>
+                    @for (domId of selectedNode()?.domain?.split(','); track domId) {
+                      <code (click)="selectNodeById(domId.trim())" class="blue-code style-clickable-type" style="margin-right: 4px; display: inline-block;">{{ domId.trim() }}</code>
+                    }
+                  </td>
+                </tr> 
+              }
               @if (selectedNode()?.range) { <tr><td>Range</td><td (click)="selectNodeById(selectedNode()?.range)"><code class="orange-code style-clickable-type">{{ selectedNode()?.range }}</code></td></tr> }
               <tr><td>Status</td><td>{{ selectedNode()?.status }}</td></tr>
             </tbody>

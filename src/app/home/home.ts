@@ -11,30 +11,30 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { D2Viewer } from '../d2-viewer/d2-viewer';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule],
+  standalone: true, 
+  imports: [FormsModule, CommonModule, D2Viewer],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
   private http = inject(HttpClient);
   
-  // Endpoint dei vocabolari da caricare in parallelo
   private urls = {
     de: 'https://raw.githubusercontent.com/gs1-germany/gs1GermanyWebVoc/refs/heads/main/currentVersion/gs1DEWebVoc.jsonld',
-    it: 'assets/voc/gs1ITWebVoc.jsonld' // File locale inserito negli assets
+    it: 'assets/voc/gs1ITWebVoc.jsonld'
   };
 
   allNodes = signal<VocNode[]>([]);
   selectedNode = signal<VocNode | null>(null);
 
   searchQuery = signal<string>('');
-  filterType = signal<string>('home'); // 'home' = mostra tutto il vocabolario mescolato
+  filterType = signal<string>('home');
   filterStatus = signal<string>('current');
 
-  // RICERCA E FILTRAGGIO DINAMICO (OTTIMIZZATO PER MOSTRARE TUTTO IN HOME)
   searchResults = computed(() => {
     const query = (this.searchQuery() || '').toLowerCase().trim();
     const typeFilter = this.filterType();
@@ -42,12 +42,10 @@ export class Home implements OnInit {
 
     let results = this.allNodes();
 
-    // 1. Filtro per Stato
     if (statusFilter === 'current' && results) {
       results = results.filter((n) => n.status !== 'deprecated');
     }
 
-    // 2. Filtro per Tipologia (Se siamo in 'home', non esclude nulla)
     if (typeFilter === 'classes') {
       results = results.filter((n) => n.type === 'Class');
     } else if (typeFilter === 'properties') {
@@ -58,7 +56,6 @@ export class Home implements OnInit {
       results = results.filter((n) => n.type === 'CodeList');
     }
 
-    // 3. Filtro testuale se l'utente digita una keyword
     if (query) {
       results = results.filter(
         (node) =>
@@ -79,12 +76,11 @@ export class Home implements OnInit {
 
     return this.allNodes()
       .filter((prop) => {
-        if (statusFilter === 'current' && prop.status === 'deprecated')
-          return false;
-        
+        if (statusFilter === 'current' && prop.status === 'deprecated') return false;
         if (!prop.domain) return false;
 
-        // Gestione dei domini multipli separati da virgola
+        if (prop.id === current.id) return false;
+
         const domains = prop.domain.split(',').map(d => d.trim());
         return (
           (prop.type === 'DatatypeProperty' || prop.type === 'ObjectProperty') &&
@@ -101,14 +97,38 @@ export class Home implements OnInit {
 
     return this.allNodes()
       .filter((prop) => {
-        if (statusFilter === 'current' && prop.status === 'deprecated')
-          return false;
+        if (statusFilter === 'current' && prop.status === 'deprecated') return false;
+
+        if (prop.id === current.id) return false;
+
         return (
           (prop.type === 'DatatypeProperty' || prop.type === 'ObjectProperty') &&
           prop.range === current.id
         );
       })
       .sort((a, b) => a.label.localeCompare(b.label));
+  });
+
+  d2GraphCode = computed(() => {
+    const current = this.selectedNode();
+    if (!current || (current.type !== 'Class' && current.type !== 'CodeList')) return '';
+
+    let code = `direction: right\n`;
+    code += `"${current.label}": {\n  shape: class\n  style.fill: "#edf4ff"\n  style.stroke: "#002c6c"\n}\n`;
+
+    this.expectedProperties().forEach(prop => {
+      code += `"${prop.label}": { shape: parallelogram; style.fill: "#fff3ed"; style.stroke: "#f26322" }\n`;
+      code += `"${prop.label}" -> "${current.label}" : domain\n`;
+    });
+
+    this.classProperties().forEach(prop => {
+      const isDatatype = prop.range?.includes('xsd:') || prop.range?.includes('rdf:');
+      const targetShape = isDatatype ? 'cylinder' : 'rectangle';
+      code += `"${prop.label}": { shape: ${targetShape}; style.fill: "#f8f9fa"; style.stroke: "#6c757d" }\n`;
+      code += `"${current.label}" -> "${prop.label}" : range\n`;
+    });
+
+    return (this.expectedProperties().length > 0 || this.classProperties().length > 0) ? code : '';
   });
 
   ngOnInit() {
@@ -139,15 +159,12 @@ export class Home implements OnInit {
           if (Array.isArray(field)) {
             const itStr = field.find((f: any) => f['@language'] === 'it');
             if (itStr && itStr['@value']) return itStr['@value'];
-
             const enStr = field.find((f: any) => f['@language'] === 'en');
             if (enStr && enStr['@value']) return enStr['@value'];
-            
             if (typeof field[0] === 'string') return field[0];
             if (field[0] && field[0]['@value']) return field[0]['@value'];
           }
-          if (typeof field === 'object' && field['@value'])
-            return field['@value'];
+          if (typeof field === 'object' && field['@value']) return field['@value'];
           return fallback;
         };
 
@@ -155,7 +172,6 @@ export class Home implements OnInit {
           if (!field) return undefined;
           if (typeof field === 'string') return field;
           if (Array.isArray(field)) {
-            // Unisce i domini multipli separandoli con una virgola
             return field.map((f: any) => typeof f === 'string' ? f : (f['@id'] || '')).join(', ');
           }
           if (typeof field === 'object' && field['@id']) return field['@id'];
@@ -170,42 +186,21 @@ export class Home implements OnInit {
             ? rawTypeField.map((t) => (typeof t === 'string' ? t.trim() : ''))
             : [typeof rawTypeField === 'string' ? rawTypeField.trim() : ''];
 
-          if (
-            rawTypes.includes('voaf:Vocabulary') ||
-            rawTypes.includes('owl:Ontology')
-          )
-            return;
+          if (rawTypes.includes('voaf:Vocabulary') || rawTypes.includes('owl:Ontology')) return;
 
           let cleanType = 'Entity';
-          if (rawTypes.includes('owl:Class') || rawTypes.includes('rdfs:Class'))
-            cleanType = 'Class';
-          else if (rawTypes.includes('owl:DatatypeProperty'))
-            cleanType = 'DatatypeProperty';
-          else if (
-            rawTypes.includes('owl:ObjectProperty') ||
-            rawTypes.includes('rdf:Property')
-          )
-            cleanType = 'ObjectProperty';
-          else if (
-            node['@id'].includes('-') ||
-            node['@id'].includes('#') ||
-            rawTypes.some((t) => t.includes('Code'))
-          )
-            cleanType = 'CodeList';
+          if (rawTypes.includes('owl:Class') || rawTypes.includes('rdfs:Class')) cleanType = 'Class';
+          else if (rawTypes.includes('owl:DatatypeProperty')) cleanType = 'DatatypeProperty';
+          else if (rawTypes.includes('owl:ObjectProperty') || rawTypes.includes('rdf:Property')) cleanType = 'ObjectProperty';
+          else if (node['@id'].includes('-') || node['@id'].includes('#') || rawTypes.some((t) => t.includes('Code'))) cleanType = 'CodeList';
 
           const item: VocNode = {
             id: node['@id'],
-            // Pulisce l'etichetta rimuovendo i prefissi prima dei ":" e dei "#" se manca rdfs:label
             label: extractText(
-              node['rdfs:label'] ||
-                node['skos:prefLabel'] ||
-                node['@id'].split(/[:#]/).pop(),
+              node['rdfs:label'] || node['skos:prefLabel'] || node['@id'].split(/[:#]/).pop(),
               node['@id']
             ),
-            comment: extractText(
-              node['rdfs:comment'] || node['dc:description'],
-              'No description available.'
-            ),
+            comment: extractText(node['rdfs:comment'] || node['dc:description'], 'No description available.'),
             type: cleanType,
             status: node['sw:term_status'] || node['vs:term_status'] || 'stable',
             domain: extractId(node['rdfs:domain']),
@@ -229,11 +224,8 @@ export class Home implements OnInit {
   selectNodeById(id: string | undefined) {
     if (!id) return;
     const targetNode = this.allNodes().find(n => n.id === id);
-    if (targetNode) {
-      this.selectedNode.set(targetNode);
-    } else {
-      console.warn(`Nodo con ID ${id} non trovato nel grafo unificato.`);
-    }
+    if (targetNode) this.selectedNode.set(targetNode);
+    else console.warn(`Node with ID ${id} not found in the graph.`);
   }
 
   resetToHome() {

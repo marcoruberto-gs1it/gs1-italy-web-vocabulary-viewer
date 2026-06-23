@@ -1,0 +1,495 @@
+direction: down
+layout-engine: elk
+
+# ===================================================================
+# 1. CORE ENTITIES (Hub Centrale)
+# ===================================================================
+gs1_Organization: "gs1:Organization" {
+  shape: class
+  "gs1:partyGLN": "xsd:string"
+  "gs1:organizationName": "rdf:langString"
+  "gs1:address": "gs1:PostalAddress"
+  "🟢 gs1it:operatingSitesCount": "xsd:integer [EXT]"
+  "🟠 gs1de:greenhouseGasEmissionInfo": "gs1de:GreenhouseGasEmissionInformation"
+  "🟠 gs1de:codeOfConduct": "gs1:ReferencedFileDetails"
+}
+
+gs1_PostalAddress: "gs1:PostalAddress" {
+  shape: class
+  "gs1:streetAddress": "rdf:langString"
+  "gs1:crossStreet": "rdf:langString"
+  "gs1:postOfficeBoxNumber": "xsd:string"
+  "gs1:addressLocality": "rdf:langString"
+  "gs1:addressRegion": "rdf:langString"
+  "gs1:countyCode": "xsd:string"
+  "gs1:postalCode": "xsd:string"
+  "gs1:addressCountry": "xsd:string"
+}
+
+gs1de_GreenhouseGasEmissionInformation: "gs1de:GreenhouseGasEmissionInformation" {
+  shape: class
+  style.fill: "#5C2E91"
+  style.font-color: "#FFFFFF"
+  "🟠 gs1de:targetEmissions": "gs1de:TargetEmissions"
+  "🟢 gs1it:actualEmissions": "gs1it:ActualEmissions"
+}
+
+# ===================================================================
+# 2. TARGET BRANCH (Ramo Obiettivi)
+# ===================================================================
+gs1de_TargetEmissions: "gs1de:TargetEmissions" {
+  shape: class
+  style.fill: "#FF9933"
+  "🟠 gs1de:greenhouseGasEmissionReductionTarget": "gs1de:GreenhouseGasEmissionReductionTargetDetails"
+  "🟠 gs1de:greenhouseGasEmissionReductionTargetVerification": "gs1:ReferencedFileDetails"
+  "🟠 gs1de:greenhouseGasEmissionInfoIsExternallyValidated": "gs1:NonbinaryLogicCode"
+}
+
+gs1de_GreenhouseGasEmissionReductionTargetDetails: "gs1de:GreenhouseGasEmissionReductionTargetDetails" {
+  shape: class
+  style.fill: "#FF9933"
+  "🟠 gs1de:greenhouseGasEmissionScope": "gs1de:GreenhouseGasEmissionScopeType"
+  "🟠 gs1de:greenhouseGasEmissionBaseLine": "gs1de:GreenhouseGasEmissionStatement"
+  "🟠 gs1de:greenhouseGasEmissionTarget": "gs1de:GreenhouseGasEmissionStatement"
+}
+
+gs1de_GreenhouseGasEmissionStatement: "gs1de:GreenhouseGasEmissionStatement" {
+  shape: class
+  style.fill: "#FF9933"
+  "🟠 gs1de:greenhouseGasEmissionYear": "xsd:gYear"
+  "🟠 gs1de:greenhouseGasEmissionQuantity": "gs1:QuantitativeValue"
+}
+
+# ===================================================================
+# 3. ACTUALS BRANCH (Ramo Consuntivi Reali)
+# ===================================================================
+gs1it_ActualEmissions: "gs1it:ActualEmissions" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:consumptionEmissionsScope1And2": "gs1it:ConsumptionEmissionsScope1And2"
+  "🟢 gs1it:transportActivityEmissions": "gs1it:TransportActivityEmissions"
+  "🟢 gs1it:wasteEmissions": "gs1it:WasteEmissions"
+  "🟢 gs1it:waterEmissions": "gs1it:WaterEmissions"
+}
+
+# --- Scope 1 & 2 Consumi Energetici ---
+gs1it_ConsumptionEmissionsScope1And2: "gs1it:ConsumptionEmissionsScope1And2" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:electricityCO2eEmissions": "gs1it:ElectricityCO2eEmissions"
+  "🟢 gs1it:fuelCO2eEmissions": "gs1it:FuelCO2eEmissions"
+  "🟢 gs1it:refrigerantLeaksCO2eEmissions": "gs1it:RefrigerantLeaksCO2eEmissions"
+}
+
+gs1it_ElectricityCO2eEmissions: "gs1it:ElectricityCO2eEmissions" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:electricityCO2e": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:electricityConsumptionDetails": "gs1it:ElectricityConsumption"
+}
+
+gs1it_ElectricityConsumption: "gs1it:ElectricityConsumption" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:electricityConsumption": "gs1:QuantitativeValue"
+  "🟢 gs1it:electricityType": "gs1it:ElectricityTypeCode"
+  "🟢 gs1it:electricityTypeDescription": "rdf:langString"
+}
+
+gs1it_FuelCO2eEmissions: "gs1it:FuelCO2eEmissions" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:fuelCO2e": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:fuelConsumptionDetails": "gs1it:FuelConsumption"
+}
+
+gs1it_FuelConsumption: "gs1it:FuelConsumption" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:consumption": "gs1:QuantitativeValue"
+  "🟢 gs1it:fuelType": "gs1it:FuelTypeCode"
+  "🟢 gs1it:fuelTypeDescription": "rdf:langString"
+}
+
+gs1it_RefrigerantLeaksCO2eEmissions: "gs1it:RefrigerantLeaksCO2eEmissions" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:refrigerantLeaksCO2e": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:refrigerantRecharged": "gs1it:RefrigerantRecharged"
+  "🟢 gs1it:refrigerantLost": "gs1it:RefrigerantLost"
+}
+
+gs1it_RefrigerantRecharged: "gs1it:RefrigerantRecharged" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:quantityOfRefrigerantRecharged": "gs1:QuantitativeValue"
+  "🟢 gs1it:refrigerantType": "gs1it:RefrigerantTypeCode"
+  "🟢 gs1it:refrigerantTypeDescription": "rdf:langString"
+}
+
+gs1it_RefrigerantLost: "gs1it:RefrigerantLost" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:quantityOfRefrigerantLost": "gs1:QuantitativeValue"
+  "🟢 gs1it:refrigerantType": "gs1it:RefrigerantTypeCode"
+  "🟢 gs1it:refrigerantTypeDescription": "rdf:langString"
+}
+
+# --- Attività di Trasporto ---
+gs1it_TransportActivityEmissions: "gs1it:TransportActivityEmissions" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:freightTransport": "gs1it:FreightTransport"
+  "🟢 gs1it:businessTravel": "gs1it:BusinessTravel"
+  "🟢 gs1it:commuting": "gs1it:Commuting"
+}
+
+gs1it_FreightTransport: "gs1it:FreightTransport" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:freightCO2e": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:fleetOfOwnedVehicles": "gs1:NonbinaryLogicCode"
+  "🟢 gs1it:freightTransportDetails": "gs1it:FreightTransportDetails"
+}
+
+gs1it_FreightTransportDetails: "gs1it:FreightTransportDetails" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:typeOfFlow": "gs1it:FlowTypeCode"
+  "🟢 gs1it:typeOfFlowDescription": "rdf:langString"
+  "🟢 gs1it:modeOfTransport": "gs1it:TransportModeCode"
+  "🟢 gs1it:noJourneys": "xsd:integer"
+  "🟢 gs1it:averageKmPerJourney": "gs1:QuantitativeValue"
+  "🟢 gs1it:weightTransportedPerJourney": "gs1:QuantitativeValue"
+  "🟢 gs1it:tonnesKm": "gs1:QuantitativeValue"
+  "🟢 gs1it:temperatureControlledTransport": "gs1:NonbinaryLogicCode"
+}
+
+gs1it_BusinessTravel: "gs1it:BusinessTravel" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:businessTravelCO2e": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:companyCarFleet": "gs1:NonbinaryLogicCode"
+  "🟢 gs1it:businessTravelDetails": "gs1it:BusinessTravelDetails"
+}
+
+gs1it_BusinessTravelDetails: "gs1it:BusinessTravelDetails" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:typeOfTransport": "gs1it:VehicleTypeCode"
+  "🟢 gs1it:typeOfTransportDescription": "rdf:langString"
+  "🟢 gs1it:typeOfFuel": "gs1it:FuelTypeCode"
+  "🟢 gs1it:typeOfFuelDescription": "rdf:langString"
+  "🟢 gs1it:totalKmPerYear": "gs1:QuantitativeValue"
+  "🟢 gs1it:noJourneys": "xsd:integer"
+}
+
+gs1it_Commuting: "gs1it:Commuting" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:commutingCO2e": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:companyCarFleet": "gs1:NonbinaryLogicCode"
+  "🟢 gs1it:commutingDetails": "gs1it:CommutingDetails"
+}
+
+gs1it_CommutingDetails: "gs1it:CommutingDetails" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:typeOfTransport": "gs1it:VehicleTypeCode"
+  "🟢 gs1it:typeOfTransportDescription": "rdf:langString"
+  "🟢 gs1it:typeOfFuel": "gs1it:FuelTypeCode"
+  "🟢 gs1it:typeOfFuelDescription": "rdf:langString"
+  "🟢 gs1it:averageDailyKm": "gs1:QuantitativeValue"
+  "🟢 gs1it:noEmployees": "xsd:integer"
+  "🟢 gs1it:averageTravellingTime": "gs1:QuantitativeValue"
+}
+
+# --- Ramo Rifiuti ---
+gs1it_WasteEmissions: "gs1it:WasteEmissions" {
+  shape: class
+  style.fill: "#4F6055"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:wasteProduction": "gs1it:WasteProduction"
+}
+
+gs1it_WasteProduction: "gs1it:WasteProduction" {
+  shape: class
+  style.fill: "#4F6055"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:quantityProduced": "gs1:QuantitativeValue"
+  "🟢 gs1it:emissions": "gs1it:TotalCO2eEmissions"
+  "🟢 gs1it:wasteType": "gs1it:WasteTypeCode"
+  "🟢 gs1it:wasteTypeDescription": "rdf:langString"
+  "🟢 gs1it:wasteDestination": "gs1it:WasteDestinationCode"
+  "🟢 gs1it:wasteDestinationDescription": "rdf:langString"
+}
+
+# --- Ramo Acqua ---
+gs1it_WaterEmissions: "gs1it:WaterEmissions" {
+  shape: class
+  style.fill: "#008080"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:waterConsumption": "gs1it:WaterConsumption"
+}
+
+gs1it_WaterConsumption: "gs1it:WaterConsumption" {
+  shape: class
+  style.fill: "#008080"
+  style.font-color: "#FFFFFF"
+  "🟢 gs1it:waterQuantity": "gs1:QuantitativeValue"
+  "🟢 gs1it:waterType": "gs1it:WaterTypeCode"
+}
+
+# ===================================================================
+# 4. UTILITY UTILS & REUSABLE CLASSES (Classi Riutilizzabili In Fondo)
+# ===================================================================
+gs1it_TotalCO2eEmissions: "gs1it:TotalCO2eEmissions" {
+  shape: class
+  style.fill: "#4D994D"
+  "🟢 gs1it:totalCO2eEmissionsQuantity": "gs1:QuantitativeValue"
+  "🟢 gs1it:calculationMethodology": "rdf:langString"
+}
+
+gs1_QuantitativeValue: "gs1:QuantitativeValue" {
+  shape: class
+  "gs1:value": "xsd:float"
+  "gs1:measurementUnitCode": "xsd:string"
+}
+
+gs1_ReferencedFileDetails: "gs1:ReferencedFileDetails" {
+  shape: class
+  "gs1:referencedFileURL": "xsd:anyURI"
+  "gs1:fileLanguageCode": "xsd:string"
+  "gs1:referencedFileSize": "gs1:QuantitativeValue"
+  "gs1:referencedFileType": "gs1:ReferencedFileTypeCode"
+}
+
+# ===================================================================
+# 5. CODELISTS (Vocabolari Controllati)
+# ===================================================================
+gs1it_TransportModeCode: "gs1it:TransportModeCode" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "ROAD_TRANSPORT"
+  "RAIL_TRANSPORT"
+  "AIR_FREIGHT"
+  "MARITIME_SHIPPING"
+}
+
+gs1it_WaterTypeCode: "gs1it:WaterTypeCode" {
+  shape: class
+  style.fill: "#008080"
+  style.font-color: "#FFFFFF"
+  "TOTAL"
+  "WELL_WATER"
+  "FROM_WATER_UTILITIES"
+  "RECOVERY_SYSTEMS"
+}
+
+gs1it_WasteTypeCode: "gs1it:WasteTypeCode" {
+  shape: class
+  style.fill: "#4F6055"
+  style.font-color: "#FFFFFF"
+  "PLASTICS"
+  "CARTONS"
+  "METALS"
+  "WOOD"
+  "ORGANIC_WASTE"
+  "OTHER"
+}
+
+gs1it_WasteDestinationCode: "gs1it:WasteDestinationCode" {
+  shape: class
+  style.fill: "#4F6055"
+  style.font-color: "#FFFFFF"
+  "TOTAL"
+  "RECYCLING"
+  "REUSE"
+  "DISPOSAL"
+  "OTHER"
+}
+
+gs1it_FuelTypeCode: "gs1it:FuelTypeCode" {
+  shape: class
+  style.fill: "#4D994D"
+  "GASOLINE"
+  "DIESEL"
+  "LPG"
+  "JET_FUEL"
+  "NONE"
+  "ELECTRIC"
+  "METHANE"
+  "OTHER"
+}
+
+gs1it_ElectricityTypeCode: "gs1it:ElectricityTypeCode" {
+  shape: class
+  style.fill: "#4D994D"
+  "TOTAL"
+  "GRID_PURCHASED"
+  "SOLAR_SELF_PRODUCED"
+  "COGENERATION_SELF_PRODUCED"
+  "RENEWABLE_CERTIFIED"
+  "OTHER"
+}
+
+gs1it_RefrigerantTypeCode: "gs1it:RefrigerantTypeCode" {
+  shape: class
+  style.fill: "#4D994D"
+  "R134A"
+  "R404A"
+  "R407A"
+  "R507A"
+  "AMMONIA"
+  "CO2"
+  "OTHER"
+}
+
+gs1it_FlowTypeCode: "gs1it:FlowTypeCode" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "PLANT_WAREHOUSE"
+  "PLANT_CUSTOMER"
+  "WAREHOUSE_TRANSIT_POINT_HUB"
+  "WAREHOUSE_CUSTOMER"
+  "TRANSIT_POINT_HUB_CUSTOMER"
+  "TRANSIT_POINT_1_CUSTOMER"
+  "TRANSIT_POINT_2_CUSTOMER"
+  "TRANSIT_POINT_3_CUSTOMER"
+  "WAREHOUSE_SALESPOINT"
+  "OTHER"
+}
+
+gs1it_VehicleTypeCode: "gs1it:VehicleTypeCode" {
+  shape: class
+  style.fill: "#666633"
+  style.font-color: "#FFFFFF"
+  "MOTORBIKE"
+  "CAR"
+  "TRAIN"
+  "BUS_UNDERGROUND"
+  "AIRPLANE"
+  "OTHER"
+}
+
+gs1_ReferencedFileTypeCode: "gs1:ReferencedFileTypeCode" {
+  shape: class
+  "GREENHOUSE_GAS_EMISSION_REDUCTION_TARGET_PROOF"
+  "CODE_OF_CONDUCT_SUPPLIER"
+}
+
+gs1de_GreenhouseGasEmissionScopeType: "gs1de:GreenhouseGasEmissionScopeType" {
+  shape: class
+  style.fill: "#FF9933"
+  "SCOPE_1"
+  "SCOPE_2"
+  "SCOPE_3"
+}
+
+# ===================================================================
+# 6. LOGICAL EDGES (Flusso dei collegamenti diretti)
+# ===================================================================
+
+# Livello Principale
+gs1_Organization."gs1:address" -> gs1_PostalAddress: "gs1:address"
+gs1_Organization."🟠 gs1de:greenhouseGasEmissionInfo" -> gs1de_GreenhouseGasEmissionInformation: "gs1de:greenhouseGasEmissionInfo"
+gs1_Organization."🟠 gs1de:codeOfConduct" -> gs1_ReferencedFileDetails: "gs1de:codeOfConduct"
+
+# Ramo Target / Actuals
+gs1de_GreenhouseGasEmissionInformation."🟠 gs1de:targetEmissions" -> gs1de_TargetEmissions: "gs1de:targetEmissions"
+gs1de_GreenhouseGasEmissionInformation."🟢 gs1it:actualEmissions" -> gs1it_ActualEmissions: "gs1it:actualEmissions"
+
+# Sviluppo Target
+gs1de_TargetEmissions."🟠 gs1de:greenhouseGasEmissionReductionTarget" -> gs1de_GreenhouseGasEmissionReductionTargetDetails: "gs1de:greenhouseGasEmissionReductionTarget"
+gs1de_TargetEmissions."🟠 gs1de:greenhouseGasEmissionReductionTargetVerification" -> gs1_ReferencedFileDetails: "gs1de:greenhouseGasEmissionReductionTargetVerification"
+gs1de_TargetEmissions."🟠 gs1de:greenhouseGasEmissionInfoIsExternallyValidated" -> gs1: NonbinaryLogicCode: "gs1de:greenhouseGasEmissionInfoIsExternallyValidated"
+gs1de_GreenhouseGasEmissionReductionTargetDetails."🟠 gs1de:greenhouseGasEmissionBaseLine" -> gs1de_GreenhouseGasEmissionStatement: "gs1de:greenhouseGasEmissionBaseLine"
+gs1de_GreenhouseGasEmissionReductionTargetDetails."🟠 gs1de:greenhouseGasEmissionTarget" -> gs1de_GreenhouseGasEmissionStatement: "gs1de:greenhouseGasEmissionTarget"
+gs1de_GreenhouseGasEmissionReductionTargetDetails."🟠 gs1de:greenhouseGasEmissionScope" -> gs1de_GreenhouseGasEmissionScopeType: "gs1de:greenhouseGasEmissionScope"
+
+# Sviluppo Actuals
+gs1it_ActualEmissions."🟢 gs1it:consumptionEmissionsScope1And2" -> gs1it_ConsumptionEmissionsScope1And2: "gs1it:consumptionEmissionsScope1And2"
+gs1it_ActualEmissions."🟢 gs1it:transportActivityEmissions" -> gs1it_TransportActivityEmissions: "gs1it:transportActivityEmissions"
+gs1it_ActualEmissions."🟢 gs1it:wasteEmissions" -> gs1it_WasteEmissions: "gs1it:wasteEmissions"
+gs1it_ActualEmissions."🟢 gs1it:waterEmissions" -> gs1it_WaterEmissions: "gs1it:waterEmissions"
+
+# Sviluppo Scope 1 & 2 (Consumi)
+gs1it_ConsumptionEmissionsScope1And2."🟢 gs1it:electricityCO2eEmissions" -> gs1it_ElectricityCO2eEmissions: "gs1it:electricityCO2eEmissions"
+gs1it_ConsumptionEmissionsScope1And2."🟢 gs1it:fuelCO2eEmissions" -> gs1it_FuelCO2eEmissions: "gs1it:fuelCO2eEmissions"
+gs1it_ConsumptionEmissionsScope1And2."🟢 gs1it:refrigerantLeaksCO2eEmissions" -> gs1it_RefrigerantLeaksCO2eEmissions: "gs1it:refrigerantLeaksCO2eEmissions"
+
+# Rete Elettricità
+gs1it_ElectricityCO2eEmissions."🟢 gs1it:electricityConsumptionDetails" -> gs1it_ElectricityConsumption: "gs1it:electricityConsumptionDetails"
+gs1it_ElectricityConsumption."🟢 gs1it:electricityConsumption" -> gs1_QuantitativeValue: "gs1it:electricityConsumption"
+gs1it_ElectricityConsumption."🟢 gs1it:electricityType" -> gs1it_ElectricityTypeCode: "gs1it:electricityType"
+
+# Rete Combustibili
+gs1it_FuelCO2eEmissions."🟢 gs1it:fuelConsumptionDetails" -> gs1it_FuelConsumption: "gs1it:fuelConsumptionDetails"
+gs1it_FuelConsumption."🟢 gs1it:consumption" -> gs1_QuantitativeValue: "gs1it:consumption"
+gs1it_FuelConsumption."🟢 gs1it:fuelType" -> gs1it_FuelTypeCode: "gs1it:fuelType"
+
+# Rete Refrigeranti
+gs1it_RefrigerantLeaksCO2eEmissions."🟢 gs1it:refrigerantRecharged" -> gs1it_RefrigerantRecharged: "gs1it:refrigerantRecharged"
+gs1it_RefrigerantLeaksCO2eEmissions."🟢 gs1it:refrigerantLost" -> gs1it_RefrigerantLost: "gs1it:refrigerantLost"
+gs1it_RefrigerantRecharged."🟢 gs1it:quantityOfRefrigerantRecharged" -> gs1_QuantitativeValue: "gs1it:quantityOfRefrigerantRecharged"
+gs1it_RefrigerantRecharged."🟢 gs1it:refrigerantType" -> gs1it_RefrigerantTypeCode: "gs1it:refrigerantType"
+gs1it_RefrigerantLost."🟢 gs1it:quantityOfRefrigerantLost" -> gs1_QuantitativeValue: "gs1it:quantityOfRefrigerantLost"
+gs1it_RefrigerantLost."🟢 gs1it:refrigerantType" -> gs1it_RefrigerantTypeCode: "gs1it:refrigerantType"
+
+# Sviluppo Trasporti
+gs1it_TransportActivityEmissions."🟢 gs1it:freightTransport" -> gs1it_FreightTransport: "gs1it:freightTransport"
+gs1it_TransportActivityEmissions."🟢 gs1it:businessTravel" -> gs1it_BusinessTravel: "gs1it:businessTravel"
+gs1it_TransportActivityEmissions."🟢 gs1it:commuting" -> gs1it_Commuting: "gs1it:commuting"
+
+gs1it_FreightTransport."🟢 gs1it:freightTransportDetails" -> gs1it_FreightTransportDetails: "gs1it:freightTransportDetails"
+gs1it_FreightTransportDetails."🟢 gs1it:typeOfFlow" -> gs1it_FlowTypeCode: "gs1it:typeOfFlow"
+gs1it_FreightTransportDetails."🟢 gs1it:modeOfTransport" -> gs1it_TransportModeCode: "gs1it:modeOfTransport"
+gs1it_FreightTransportDetails."🟢 gs1it:averageKmPerJourney" -> gs1_QuantitativeValue: "gs1it:averageKmPerJourney"
+gs1it_FreightTransportDetails."🟢 gs1it:weightTransportedPerJourney" -> gs1it_QuantitativeValue: "gs1it:weightTransportedPerJourney"
+gs1it_FreightTransportDetails."🟢 gs1it:tonnesKm" -> gs1_QuantitativeValue: "gs1it:tonnesKm"
+
+gs1it_BusinessTravel."🟢 gs1it:businessTravelDetails" -> gs1it_BusinessTravelDetails: "gs1it:businessTravelDetails"
+gs1it_BusinessTravelDetails."🟢 gs1it:typeOfTransport" -> gs1it_VehicleTypeCode: "gs1it:typeOfTransport"
+gs1it_BusinessTravelDetails."🟢 gs1it:typeOfFuel" -> gs1it_FuelTypeCode: "gs1it:typeOfFuel"
+gs1it_BusinessTravelDetails."🟢 gs1it:totalKmPerYear" -> gs1_QuantitativeValue: "gs1it:totalKmPerYear"
+
+gs1it_Commuting."🟢 gs1it:commutingDetails" -> gs1it_CommutingDetails: "gs1it:commutingDetails"
+gs1it_CommutingDetails."🟢 gs1it:typeOfTransport" -> gs1it_VehicleTypeCode: "gs1it:typeOfTransport"
+gs1it_CommutingDetails."🟢 gs1it:typeOfFuel" -> gs1it_FuelTypeCode: "gs1it:typeOfFuel"
+gs1it_CommutingDetails."🟢 gs1it:averageDailyKm" -> gs1_QuantitativeValue: "gs1it:averageDailyKm"
+gs1it_CommutingDetails."🟢 gs1it:noEmployees" -> gs1: QuantitativeValue: "gs1it:noEmployees"
+gs1it_CommutingDetails."🟢 gs1it:averageTravellingTime" -> gs1_QuantitativeValue: "gs1it:averageTravellingTime"
+
+# Sviluppo Ramo Waste
+gs1it_WasteEmissions."🟢 gs1it:wasteProduction" -> gs1it_WasteProduction: "gs1it:wasteProduction"
+gs1it_WasteProduction."🟢 gs1it:quantityProduced" -> gs1_QuantitativeValue: "gs1it:quantityProduced"
+gs1it_WasteProduction."🟢 gs1it:wasteType" -> gs1it_WasteTypeCode: "gs1it:wasteType"
+gs1it_WasteProduction."🟢 gs1it:wasteDestination" -> gs1it_WasteDestinationCode: "gs1it:wasteDestination"
+
+# Sviluppo Ramo Water
+gs1it_WaterEmissions."🟢 gs1it:waterConsumption" -> gs1it_WaterConsumption: "gs1it:waterConsumption"
+gs1it_WaterConsumption."🟢 gs1it:waterQuantity" -> gs1_QuantitativeValue: "gs1it:waterQuantity"
+gs1it_WaterConsumption."🟢 gs1it:waterType" -> gs1it_WaterTypeCode: "gs1it:waterType"
+
+# Confluenza verso la classe raggruppata TotalCO2eEmissions
+gs1it_ElectricityCO2eEmissions."🟢 gs1it:electricityCO2e" -> gs1it_TotalCO2eEmissions: "gs1it:electricityCO2e"
+gs1it_FuelCO2eEmissions."🟢 gs1it:fuelCO2e" -> gs1it_TotalCO2eEmissions: "gs1it:fuelCO2e"
+gs1it_RefrigerantLeaksCO2eEmissions."🟢 gs1it:refrigerantLeaksCO2e" -> gs1it_TotalCO2eEmissions: "gs1it:refrigerantLeaksCO2e"
+gs1it_FreightTransport."🟢 gs1it:freightCO2e" -> gs1it_TotalCO2eEmissions: "gs1it:freightCO2e"
+gs1it_BusinessTravel."🟢 gs1it:businessTravelCO2e" -> gs1it_TotalCO2eEmissions: "gs1it:businessTravelCO2e"
+gs1it_Commuting."🟢 gs1it:commutingCO2e" -> gs1it_TotalCO2eEmissions: "gs1it:commutingCO2e"
+gs1it_WasteProduction."🟢 gs1it:emissions" -> gs1it_TotalCO2eEmissions: "gs1it:emissions"
+
+# Chiusure su Quantitative Value e File
+gs1it_TotalCO2eEmissions."🟢 gs1it:totalCO2eEmissionsQuantity" -> gs1_QuantitativeValue: "gs1it:totalCO2eEmissionsQuantity"
+gs1de_GreenhouseGasEmissionStatement."🟠 gs1de:greenhouseGasEmissionQuantity" -> gs1_QuantitativeValue: "gs1de:greenhouseGasEmissionQuantity"
+gs1_ReferencedFileDetails."gs1:referencedFileType" -> gs1_ReferencedFileTypeCode: "gs1:referencedFileType"

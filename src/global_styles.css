@@ -14,7 +14,7 @@ body, html {
   color: var(--text-dark);
 }
 
-/* Header */
+/* Header dell'applicazione */
 .custom-header {
   background-color: var(--primary-color);
   color: #fff;
@@ -48,14 +48,14 @@ body, html {
   font-weight: 600;
 }
 
-/* Layout Container */
+/* Layout Workspace Principale */
 .app-container {
   display: flex;
   height: calc(100vh - 64px);
   overflow: hidden;
 }
 
-/* Sidebar */
+/* Barra Laterale (Sidebar) */
 .sidebar-panel {
   width: 320px;
   border-right: 1px solid var(--border-color);
@@ -163,7 +163,7 @@ body, html {
   font-size: 14px;
 }
 
-/* Main Content Workspace */
+/* Area dei Dettagli Principale */
 .main-content {
   flex: 1;
   padding: 24px;
@@ -171,7 +171,6 @@ body, html {
   background-color: var(--bg-light);
 }
 
-/* Detail UI Elements */
 .detail-header-row {
   display: flex;
   align-items: center;
@@ -194,10 +193,10 @@ body, html {
 }
 .badge-stable { background-color: #d4edda; color: #155724; }
 .badge-testing { background-color: #cce5ff; color: #004085; }
-.badge-stable, .badge-draft { background-color: #fff3cd; color: #856404; }
+.badge-draft { background-color: #fff3cd; color: #856404; }
 .badge-deprecated { background-color: #f8d7da; color: #721c24; text-decoration: line-through; }
 
-/* Accordions */
+/* Accordions (Fisarmoniche) */
 .gs1-accordion {
   background: white;
   margin-bottom: 16px;
@@ -217,7 +216,7 @@ body, html {
   padding: 20px;
 }
 
-/* Tables */
+/* Tabelle dati */
 .table-responsive-wrapper {
   overflow-x: auto;
 }
@@ -261,7 +260,7 @@ body, html {
   word-break: break-all;
 }
 
-/* Code Styles cliccabili */
+/* Tag di codice cliccabili (Tipi attesi) */
 code {
   font-family: monospace;
   padding: 2px 6px;
@@ -290,14 +289,14 @@ code {
   font-style: italic;
 }
 
-/* Meta Table specific */
+/* Tabella Meta */
 .meta-table tr:hover { background-color: transparent !important; cursor: default; }
 .meta-table td:first-child { font-weight: 600; width: 15%; color: var(--text-muted); }
 .type-neutral-badge { background-color: #e2e3e5; color: #383d41; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
 .text-dark-bold { font-weight: bold; }
 .text-dark-leading { line-height: 1.5; }
 
-/* Welcome Card */
+/* Dashboard di Benvenuto */
 .welcome-card-wrapper {
   background: white;
   padding: 40px;
@@ -309,6 +308,7 @@ code {
 .welcome-title { color: var(--primary-color); font-size: 28px; margin-top: 0; }
 .welcome-description { color: #4a5568; line-height: 1.6; font-size: 16px; margin-bottom: 32px; }
 .welcome-cta-group { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; }
+
 .cta-button {
   background-color: var(--primary-color);
   color: white;
@@ -317,9 +317,10 @@ code {
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.1s;
 }
 .cta-button:hover { background-color: #001f4d; }
+.cta-button:active { transform: scale(0.98); }
 .cta-button-secondary { background-color: #e2e8f0; color: #4a5568; }
 .cta-button-secondary:hover { background-color: #cbd5e1; }
 .guidance-section { background-color: var(--bg-light); padding: 20px; border-radius: 8px; border-left: 4px solid var(--secondary-color); }

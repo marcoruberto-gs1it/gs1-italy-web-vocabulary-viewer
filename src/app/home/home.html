@@ -1,30 +1,15 @@
 <header class="custom-header">
-  <div 
-    class="logo" 
-    (click)="resetToHome()" 
-    title="Go to Home Page and reset filters"
-  >
-    <img 
-      src="https://static.gs1it.org/static/images/logo/gs1it.1ea986161973.png" 
-      alt="GS1 Italy Logo" 
-      class="header-logo-img"
-    >
-    <span class="sub-title">
-      Web Vocabulary Extension
-    </span>
+  <div class="logo" (click)="resetToHome()" title="Go to Home Page and reset filters">
+    <img src="https://static.gs1it.org/static/images/logo/gs1it.1ea986161973.png" alt="GS1 Italy Logo" class="header-logo-img">
+    <span class="sub-title">Web Vocabulary Extension</span>
   </div>
-  
-  <div class="app-version-title">
-    GS1 Italy - Web Vocabulary
-  </div>
+  <div class="app-version-title">GS1 Italy - Web Vocabulary</div>
 </header>
 
 <div class="app-container">
   
   <aside class="sidebar-panel">
-    
     <div class="search-container">
-      
       <div class="filter-field-wrapper">
         <select [(ngModel)]="filterType" class="responsive-select">
           <option value="home">Home Page (All Items)</option>
@@ -42,12 +27,7 @@
       </div>
 
       <div class="search-input-wrapper">
-        <input 
-          type="text" 
-          [(ngModel)]="searchQuery" 
-          placeholder="Search across all types..." 
-          class="search-input"
-        />
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Search across all types..." class="search-input" />
         @if (searchQuery()) {
           <button (click)="clearSearch()" class="search-clear-btn">✕</button>
         }
@@ -60,38 +40,26 @@
         @for (res of searchResults(); track res.id) {
           <li class="tree-node-wrapper" (click)="selectNode(res)" [class.active]="selectedNode()?.id === res.id">
             <div class="sidebar-item-row">
-              
               <div class="sidebar-item-text">
                 <span class="truncate item-main-label" [style.textDecoration]="res.status === 'deprecated' ? 'line-through' : 'none'">{{ res.label }}</span>
-                <span class="item-sub-type">
-                  {{ res.type }}
-                </span>
+                <span class="item-sub-type">{{ res.type }}</span>
               </div>
-
               <div class="sidebar-item-badges">
-                @if (res.status === 'deprecated') {
-                  <span class="badge-icon-del">❌</span>
-                }
+                @if (res.status === 'deprecated') { <span class="badge-icon-del">❌</span> }
                 @if (res.status === 'testing' || res.status === 'draft') {
-                  <span class="badge-status-alt">
-                    {{ res.status === 'testing' ? 'test' : 'draft' }}
-                  </span>
+                  <span class="badge-status-alt">{{ res.status === 'testing' ? 'test' : 'draft' }}</span>
                 }
               </div>
-
             </div>
           </li>
         } @empty {
-          <li class="sidebar-empty-state">
-            No items found matching the current search/filter.
-          </li>
+          <li class="sidebar-empty-state">No items found matching the current search/filter.</li>
         }
       </ul>
     </div>
   </aside>
 
   <main class="main-content">
-    
     @if (selectedNode()) {
       
       <div class="detail-header-row">
@@ -106,18 +74,13 @@
       </div>
 
       @if (selectedNode()?.type === 'Class' || selectedNode()?.type === 'CodeList') {
+        
         <details class="gs1-accordion" open>
           <summary>Properties defined within {{ selectedNode()?.id }}</summary>
           <div class="accordion-content table-responsive-wrapper">
             @if (classProperties().length > 0) {
               <table class="custom-table">
-                <thead>
-                  <tr>
-                    <th>Property</th>
-                    <th>Expected Type</th>
-                    <th>Description & Notes</th>
-                  </tr>
-                </thead>
+                <thead><tr><th>Property</th><th>Expected Type</th><th>Description & Notes</th></tr></thead>
                 <tbody>
                   @for (prop of classProperties(); track prop.id) {
                     <tr (click)="selectNode(prop)">
@@ -133,28 +96,16 @@
                   }
                 </tbody>
               </table>
-            } @else {
-              <div class="table-empty-notice">
-                No specific properties declared within this class.
-              </div>
-            }
+            } @else { <div class="table-empty-notice">No specific properties declared within this class.</div> }
           </div>
         </details>
-      }
 
-      @if (selectedNode()?.type === 'Class' || selectedNode()?.type === 'CodeList') {
         <details class="gs1-accordion" open>
           <summary>Properties expecting a value of {{ selectedNode()?.id }}</summary>
           <div class="accordion-content table-responsive-wrapper">
             @if (expectedProperties().length > 0) {
               <table class="custom-table">
-                <thead>
-                  <tr>
-                    <th>Property</th>
-                    <th>On Types (Domain)</th>
-                    <th>Description & Notes</th>
-                  </tr>
-                </thead>
+                <thead><tr><th>Property</th><th>On Types (Domain)</th><th>Description & Notes</th></tr></thead>
                 <tbody>
                   @for (prop of expectedProperties(); track prop.id) {
                     <tr (click)="selectNode(prop)">
@@ -174,13 +125,21 @@
                   }
                 </tbody>
               </table>
+            } @else { <div class="table-empty-notice">No properties expect this class as a value.</div> }
+          </div>
+        </details>
+        
+        <details class="gs1-accordion" open>
+          <summary>Network Graph (D2 Visualization)</summary>
+          <div class="accordion-content">
+            @if (d2GraphCode()) {
+              <app-d2-viewer [d2Code]="d2GraphCode()"></app-d2-viewer>
             } @else {
-              <div class="table-empty-notice">
-                No properties expect this class as a value.
-              </div>
+              <div class="table-empty-notice">No semantic relationships to display for this node.</div>
             }
           </div>
         </details>
+
       }
 
       <details class="gs1-accordion" open>
@@ -202,7 +161,12 @@
                   </td>
                 </tr> 
               }
-              @if (selectedNode()?.range) { <tr><td>Range</td><td (click)="selectNodeById(selectedNode()?.range)"><code class="orange-code style-clickable-type">{{ selectedNode()?.range }}</code></td></tr> }
+              @if (selectedNode()?.range) { 
+                <tr>
+                  <td>Range</td>
+                  <td (click)="selectNodeById(selectedNode()?.range)"><code class="orange-code style-clickable-type">{{ selectedNode()?.range }}</code></td>
+                </tr> 
+              }
               <tr><td>Status</td><td>{{ selectedNode()?.status }}</td></tr>
             </tbody>
           </table>
@@ -218,19 +182,10 @@
         </p>
         
         <div class="welcome-cta-group">
-          <button (click)="filterType.set('classes')" class="cta-button">
-            Browse Classes
-          </button>
-          <button (click)="filterType.set('properties')" class="cta-button">
-            Explore Properties
-          </button>
-          <button (click)="filterType.set('codelists')" class="cta-button">
-            View Code Lists
-          </button>
-          <a href="assets/voc/gs1ITWebVoc.jsonld" 
-             target="_blank" 
-             class="cta-button cta-button-secondary"
-             style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+          <button (click)="filterType.set('classes')" class="cta-button">Browse Classes</button>
+          <button (click)="filterType.set('properties')" class="cta-button">Explore Properties</button>
+          <button (click)="filterType.set('codelists')" class="cta-button">View Code Lists</button>
+          <a href="assets/voc/gs1ITWebVoc.jsonld" target="_blank" class="cta-button cta-button-secondary" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
             View Raw JSON-LD
           </a>
         </div>
@@ -238,9 +193,9 @@
         <div class="guidance-section">
           <h4 class="guidance-title">Quick Navigation Tips:</h4>
           <ul class="guidance-list">
-            <li>Use the <strong>Search Input Box</strong> inside the sidebar panel to quickly query any concept keyword or full URI path instantly across the entire vocabulary.</li>
-            <li>Click on specific vocabulary items from the list to populate active graph fields, domain ranges, or metadata statuses here in the workspace.</li>
-            <li>Use the top dropdown inside the sidebar to toggle between dedicated asset lists or change the general visibility status filter anytime.</li>
+            <li>Use the <strong>Search Input Box</strong> inside the sidebar panel to quickly query any concept keyword.</li>
+            <li>Click on specific vocabulary items from the list to populate active graph fields.</li>
+            <li><strong>Interactive Graph:</strong> Explore the brand new D2 visual relationship diagram attached to Class nodes!</li>
           </ul>
         </div>
       </div>

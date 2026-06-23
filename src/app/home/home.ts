@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import {
   Component,
   computed,
-  effect,
   inject,
   OnInit,
   signal,
 } from '@angular/core';
-import { VocNode } from '../models'; // Assicurati che il percorso sia corretto in base alla tua alberatura
+import { VocNode } from '../models'; // Verifica che questo path sia corretto nel tuo progetto
 import { FormsModule } from '@angular/forms';
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
-import { forkJoin } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +21,10 @@ import { forkJoin } from 'rxjs';
 export class Home implements OnInit {
   private http = inject(HttpClient);
   
-  // URL dei vocabolari da caricare in parallelo
+  // Endpoint dei vocabolari da caricare in parallelo
   private urls = {
     de: 'https://raw.githubusercontent.com/gs1-germany/gs1GermanyWebVoc/refs/heads/main/currentVersion/gs1DEWebVoc.jsonld',
-    it: 'assets/gs1ITWebVoc.jsonld' // Il tuo file locale per il momento
+    it: 'assets/voc/gs1ITWebVoc.jsonld' // File locale inserito negli assets dell'applicazione
   };
 
   allNodes = signal<VocNode[]>([]);
@@ -34,7 +34,7 @@ export class Home implements OnInit {
   filterType = signal<string>('home'); // 'home' = mostra tutto il vocabolario mescolato
   filterStatus = signal<string>('current');
 
-  // RICERCA E FILTRAGGIO DINAMICO
+  // RICERCA E FILTRAGGIO DINAMICO (OTTIMIZZATO PER MOSTRARE TUTTO IN HOME)
   searchResults = computed(() => {
     const query = (this.searchQuery() || '').toLowerCase().trim();
     const typeFilter = this.filterType();
@@ -109,17 +109,26 @@ export class Home implements OnInit {
   });
 
   ngOnInit() {
-    // forkJoin scarica entrambi i file JSON-LD contemporaneamente
+    // forkJoin scarica i file in parallelo con paracadute catchError per evitare schermate vuote
     forkJoin({
-      deData: this.http.get<any>(this.urls.de),
-      itData: this.http.get<any>(this.urls.it)
+      deData: this.http.get<any>(this.urls.de).pipe(
+        catchError(err => {
+          console.error('Errore nel caricamento del vocabolario tedesco:', err);
+          return of({ '@graph': [] });
+        })
+      ),
+      itData: this.http.get<any>(this.urls.it).pipe(
+        catchError(err => {
+          console.error('Errore nel caricamento del vocabolario italiano (locale):', err);
+          return of({ '@graph': [] });
+        })
+      )
     }).subscribe({
       next: (responses) => {
-        // Estrai i grafi, gestendo il caso in cui il nodo "@graph" non sia presente
         const nodesDE = responses.deData['@graph'] || (Array.isArray(responses.deData) ? responses.deData : []);
         const nodesIT = responses.itData['@graph'] || (Array.isArray(responses.itData) ? responses.itData : []);
         
-        // Unisci i due vocabolari in un unico array
+        // Unione a caldo dei due array di nodi semantic-graph
         const allRawNodes = [...nodesDE, ...nodesIT];
         const tmpAll: VocNode[] = [];
 
@@ -127,8 +136,7 @@ export class Home implements OnInit {
           if (!field) return fallback;
           if (typeof field === 'string') return field;
           if (Array.isArray(field)) {
-            // Se in futuro vorrai dare priorità alla lingua italiana rispetto all'inglese
-            // potresti cercare prima '@language': 'it' e poi fare fallback su 'en'
+            // Priorità alla lingua italiana se disponibile, altrimenti ripiega su inglese
             const itStr = field.find((f: any) => f['@language'] === 'it');
             if (itStr && itStr['@value']) return itStr['@value'];
 
@@ -197,7 +205,8 @@ export class Home implements OnInit {
               'No description available.'
             ),
             type: cleanType,
-            status: node['sw:term_status'] || node['sw:term_status'] || node['vs:term_status'] || 'stable',
+            // Supporta sia sw:term_status (tedesco) che vs:term_status (italiano)
+            status: node['sw:term_status'] || node['vs:term_status'] || 'stable',
             domain: extractId(node['rdfs:domain']),
             range: extractId(node['rdfs:range']),
             subClassOf: extractId(node['rdfs:subClassOf']),
@@ -209,14 +218,22 @@ export class Home implements OnInit {
         this.allNodes.set(tmpAll);
         this.selectedNode.set(null);
       },
-      error: (err) => {
-        console.error('Errore durante il caricamento dei file JSON-LD:', err);
-      }
     });
   }
 
   selectNode(node: VocNode) {
     this.selectedNode.set(node);
+  }
+
+  // Permette di saltare da una risorsa all'altra cliccando sui domain/range nelle tabelle
+  selectNodeById(id: string | undefined) {
+    if (!id) return;
+    const targetNode = this.allNodes().find(n => n.id === id);
+    if (targetNode) {
+      this.selectedNode.set(targetNode);
+    } else {
+      console.warn(`Nodo con ID ${id} non trovato nel grafo unificato.`);
+    }
   }
 
   resetToHome() {

@@ -15,7 +15,7 @@
   </div>
   
   <div class="app-version-title">
-    GS1 Italy Web Vocabulary Viewer v1.7
+    GS1 Italy - Web Vocabulary
   </div>
 </header>
 
@@ -125,8 +125,8 @@
                         <span class="item-link-label" [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'">{{ prop.label }}</span>
                         <span class="item-mono-uri">{{ prop.id }}</span>
                       </td>
-                      <td class="col-width-type">
-                        <code class="orange-code">{{ prop.range }}</code>
+                      <td class="col-width-type" (click)="$event.stopPropagation(); selectNodeById(prop.range)">
+                        <code class="orange-code style-clickable-type" title="Click to view this class details">{{ prop.range }}</code>
                       </td>
                       <td>{{ prop.comment }}</td>
                     </tr>
@@ -162,8 +162,8 @@
                         <span class="item-link-label" [style.textDecoration]="prop.status === 'deprecated' ? 'line-through' : 'none'">{{ prop.label }}</span>
                         <span class="item-mono-uri">{{ prop.id }}</span>
                       </td>
-                      <td class="col-width-type">
-                        <code class="blue-code">{{ prop.domain }}</code>
+                      <td class="col-width-type" (click)="$event.stopPropagation(); selectNodeById(prop.domain)">
+                        <code class="blue-code style-clickable-type" title="Click to view this class details">{{ prop.domain }}</code>
                       </td>
                       <td>{{ prop.comment }}</td>
                     </tr>
@@ -188,8 +188,8 @@
               <tr><td>Type</td><td><span class="type-neutral-badge">{{ selectedNode()?.type }}</span></td></tr>
               <tr><td>Label</td><td class="text-dark-bold">{{ selectedNode()?.label }}</td></tr>
               <tr><td>Comment</td><td class="text-dark-leading">{{ selectedNode()?.comment }}</td></tr>
-              @if (selectedNode()?.domain) { <tr><td>Domain</td><td><code class="blue-code">{{ selectedNode()?.domain }}</code></td></tr> }
-              @if (selectedNode()?.range) { <tr><td>Range</td><td><code class="orange-code">{{ selectedNode()?.range }}</code></td></tr> }
+              @if (selectedNode()?.domain) { <tr><td>Domain</td><td (click)="selectNodeById(selectedNode()?.domain)"><code class="blue-code style-clickable-type">{{ selectedNode()?.domain }}</code></td></tr> }
+              @if (selectedNode()?.range) { <tr><td>Range</td><td (click)="selectNodeById(selectedNode()?.range)"><code class="orange-code style-clickable-type">{{ selectedNode()?.range }}</code></td></tr> }
               <tr><td>Status</td><td>{{ selectedNode()?.status }}</td></tr>
             </tbody>
           </table>
@@ -199,7 +199,7 @@
     } @else {
       
       <div class="welcome-card-wrapper">
-        <h2 class="welcome-title">GS1 Italy Web Vocabulary Explorer</h2>
+        <h2 class="welcome-title">GS1 Italy - Web Vocabulary</h2>
         <p class="welcome-description">
           Welcome to the formal interactive inspector for GS1 Web Vocabulary Extensions managed by GS1 Italy. This semantic engine enables developers, information architects, and retail partners to browse data models, validation constraints, and controlled vocabularies seamlessly.
         </p>
@@ -214,7 +214,7 @@
           <button (click)="filterType.set('codelists')" class="cta-button">
             View Code Lists
           </button>
-          <a href="https://raw.githubusercontent.com/tuo-username/tuo-repo/main/gs1ITWebVoc.jsonld" 
+          <a href="assets/voc/gs1ITWebVoc.jsonld" 
              target="_blank" 
              class="cta-button cta-button-secondary"
              style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">

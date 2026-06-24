@@ -14,25 +14,25 @@
       "@id": "gs1:Organization",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1:" },
-      "rdfs:label": { "@language": "en", "@value": "Organization" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "rdfs:label": { "@language": "en", "@value": "Organization" }
     },
     {
       "@id": "gs1:PostalAddress",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1:" },
-      "rdfs:label": { "@language": "en", "@value": "Postal Address" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "rdfs:label": { "@language": "en", "@value": "Postal Address" }
+    },
+    {
+      "@id": "gs1:Place",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:isDefinedBy": { "@id": "gs1:" },
+      "rdfs:label": { "@language": "en", "@value": "Place" }
     },
     {
       "@id": "gs1de:GreenhouseGasEmissionInformation",
       "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "A set of greenhouse gas emission information details." },
       "rdfs:isDefinedBy": { "@id": "gs1de:" },
       "rdfs:label": { "@language": "en", "@value": "Greenhouse Gas Emission Information" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
       "sw:term_status": "testing"
     },
     {
@@ -40,7 +40,6 @@
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1de:" },
       "rdfs:label": { "@language": "en", "@value": "Target Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
       "sw:term_status": "testing"
     },
     {
@@ -48,7 +47,6 @@
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1de:" },
       "rdfs:label": { "@language": "en", "@value": "Greenhouse Gas Emission Reduction Target Details" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
       "sw:term_status": "testing"
     },
     {
@@ -56,7 +54,6 @@
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1de:" },
       "rdfs:label": { "@language": "en", "@value": "Greenhouse Gas Emission Statement" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
       "sw:term_status": "testing"
     },
     {
@@ -64,474 +61,353 @@
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Actual Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
-      "@id": "gs1it:ConsumptionEmissionsScope1And2",
+      "@id": "gs1it:EnergyConsumptionEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
-      "rdfs:label": { "@language": "en", "@value": "Consumption Emissions Scope 1 and 2" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "rdfs:label": { "@language": "en", "@value": "Energy Consumption Emissions" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:ElectricityCO2eEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Electricity CO2e Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:ElectricityConsumption",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Electricity Consumption" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:FuelCO2eEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Fuel CO2e Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:FuelConsumption",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Fuel Consumption" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:RefrigerantLeaksCO2eEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Refrigerant Leaks CO2e Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:RefrigerantRecharged",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Refrigerant Recharged" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:RefrigerantLost",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Refrigerant Lost" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:TransportActivityEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Transport Activity Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:FreightTransport",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Freight Transport" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:FreightTransportDetails",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Freight Transport Details" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:BusinessTravel",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Business Travel" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:BusinessTravelDetails",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Business Travel Details" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:Commuting",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Commuting" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:CommutingDetails",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Commuting Details" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:WasteEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Waste Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:WasteProduction",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Waste Production" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:WaterEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Water Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:WaterConsumption",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Water Consumption" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:TotalCO2eEmissions",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1it:" },
       "rdfs:label": { "@language": "en", "@value": "Total CO2e Emissions" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" },
-      "sw:term_status": "testing"
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1:QuantitativeValue",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1:" },
-      "rdfs:label": { "@language": "en", "@value": "Quantitative Value" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" }
+      "rdfs:label": { "@language": "en", "@value": "Quantitative Value" }
     },
     {
       "@id": "gs1:ReferencedFileDetails",
       "@type": [ "owl:Class", "rdfs:Class" ],
       "rdfs:isDefinedBy": { "@id": "gs1:" },
-      "rdfs:label": { "@language": "en", "@value": "Referenced File Details" },
-      "rdfs:subClassOf": { "@id": "owl:Thing" }
+      "rdfs:label": { "@language": "en", "@value": "Referenced File Details" }
+    },
+    
+    {
+      "@id": "gs1it:TransportModeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Transport Mode Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:WaterTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Water Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:WasteTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Waste Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:WasteDestinationCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Waste Destination Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:FuelTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Fuel Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:ElectricityTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Electricity Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:RefrigerantTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Refrigerant Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:FlowTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Flow Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:VehicleTypeCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Vehicle Type Code" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1de:GreenhouseGasEmissionScopeType",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Greenhouse Gas Emission Scope Type" },
+      "sw:term_status": "testing"
+    },
+    {
+      "@id": "gs1:NonbinaryLogicCode",
+      "@type": [ "owl:Class", "rdfs:Class" ],
+      "rdfs:label": { "@language": "en", "@value": "Nonbinary Logic Code" }
     },
 
     {
-      "@id": "gs1:partyGLN",
+      "@id": "gs1:globalLocationNumber",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:Organization" },
+      "rdfs:domain": { "@id": "gs1:Place" },
       "rdfs:range": { "@id": "xsd:string" }
-    },
-    {
-      "@id": "gs1:organizationName",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:Organization" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1:address",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:Organization" },
-      "rdfs:range": { "@id": "gs1:PostalAddress" }
-    },
-    {
-      "@id": "gs1it:operatingSitesCount",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:Organization" },
-      "rdfs:range": { "@id": "xsd:integer" }
-    },
-    {
-      "@id": "gs1de:codeOfConduct",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:Organization" },
-      "rdfs:range": { "@id": "gs1:ReferencedFileDetails" }
-    },
-    {
-      "@id": "gs1de:greenhouseGasEmissionInfo",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:Organization" },
-      "rdfs:range": { "@id": "gs1de:GreenhouseGasEmissionInformation" }
-    },
-
-    {
-      "@id": "gs1:streetAddress",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1:crossStreet",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1:postOfficeBoxNumber",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "xsd:string" }
-    },
-    {
-      "@id": "gs1:addressLocality",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1:addressRegion",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1:countyCode",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "xsd:string" }
-    },
-    {
-      "@id": "gs1:postalCode",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "xsd:string" }
-    },
-    {
-      "@id": "gs1:addressCountry",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:PostalAddress" },
-      "rdfs:range": { "@id": "xsd:string" }
-    },
-
-    {
-      "@id": "gs1de:targetEmissions",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionInformation" },
-      "rdfs:range": { "@id": "gs1de:TargetEmissions" }
-    },
-    {
-      "@id": "gs1it:actualEmissions",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionInformation" },
-      "rdfs:range": { "@id": "gs1it:ActualEmissions" }
-    },
-
-    {
-      "@id": "gs1de:greenhouseGasEmissionReductionTarget",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:TargetEmissions" },
-      "rdfs:range": { "@id": "gs1de:GreenhouseGasEmissionReductionTargetDetails" }
-    },
-    {
-      "@id": "gs1de:greenhouseGasEmissionReductionTargetVerification",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:TargetEmissions" },
-      "rdfs:range": { "@id": "gs1:ReferencedFileDetails" }
-    },
-    {
-      "@id": "gs1de:greenhouseGasEmissionInfoIsExternallyValidated",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:TargetEmissions" },
-      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" }
     },
 
     {
       "@id": "gs1de:greenhouseGasEmissionScope",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionReductionTargetDetails" },
+      "rdfs:domain": { 
+        "owl:unionOf": [ 
+          { "@id": "gs1de:GreenhouseGasEmissionReductionTargetDetails" },
+          { "@id": "gs1it:ElectricityCO2eEmissions" },
+          { "@id": "gs1it:FuelCO2eEmissions" },
+          { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" }
+        ]
+      },
       "rdfs:range": { "@id": "gs1de:GreenhouseGasEmissionScopeType" }
     },
+    
     {
-      "@id": "gs1de:greenhouseGasEmissionBaseLine",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionReductionTargetDetails" },
-      "rdfs:range": { "@id": "gs1de:GreenhouseGasEmissionStatement" }
-    },
-    {
-      "@id": "gs1de:greenhouseGasEmissionTarget",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionReductionTargetDetails" },
-      "rdfs:range": { "@id": "gs1de:GreenhouseGasEmissionStatement" }
-    },
-
-    {
-      "@id": "gs1de:greenhouseGasEmissionYear",
+      "@id": "gs1it:consumptionYear",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionStatement" },
-      "rdfs:range": { "@id": "xsd:gYear" }
+      "rdfs:domain": {
+        "owl:unionOf": [
+          { "@id": "gs1it:ElectricityConsumption" },
+          { "@id": "gs1it:FuelConsumption" },
+          { "@id": "gs1it:WaterConsumption" }
+        ]
+      },
+      "rdfs:range": { "@id": "xsd:gYear" },
+      "sw:term_status": "draft"
     },
     {
-      "@id": "gs1de:greenhouseGasEmissionQuantity",
+      "@id": "gs1it:referenceYear",
+      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
+      "rdfs:domain": {
+        "owl:unionOf": [
+          { "@id": "gs1it:RefrigerantRecharged" },
+          { "@id": "gs1it:RefrigerantLost" },
+          { "@id": "gs1it:FreightTransportDetails" },
+          { "@id": "gs1it:BusinessTravelDetails" },
+          { "@id": "gs1it:CommutingDetails" }
+        ]
+      },
+      "rdfs:range": { "@id": "xsd:gYear" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:productionYear",
+      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:WasteProduction" },
+      "rdfs:range": { "@id": "xsd:gYear" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:emissionYear",
+      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:TotalCO2eEmissions" },
+      "rdfs:range": { "@id": "xsd:gYear" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:reportingSite",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1de:GreenhouseGasEmissionStatement" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:domain": {
+        "owl:unionOf": [
+          { "@id": "gs1it:ElectricityConsumption" },
+          { "@id": "gs1it:FuelConsumption" },
+          { "@id": "gs1it:RefrigerantRecharged" },
+          { "@id": "gs1it:RefrigerantLost" },
+          { "@id": "gs1it:FreightTransportDetails" },
+          { "@id": "gs1it:BusinessTravelDetails" },
+          { "@id": "gs1it:CommutingDetails" },
+          { "@id": "gs1it:WasteProduction" },
+          { "@id": "gs1it:WaterConsumption" },
+          { "@id": "gs1it:TotalCO2eEmissions" }
+        ]
+      },
+      "rdfs:range": { "@id": "gs1:Place" },
+      "sw:term_status": "draft"
     },
 
     {
-      "@id": "gs1it:consumptionEmissionsScope1And2",
+      "@id": "gs1it:energyConsumptionEmissions",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
-      "rdfs:range": { "@id": "gs1it:ConsumptionEmissionsScope1And2" }
+      "rdfs:range": { "@id": "gs1it:EnergyConsumptionEmissions" },
+      "sw:term_status": "draft"
     },
-    {
-      "@id": "gs1it:transportActivityEmissions",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
-      "rdfs:range": { "@id": "gs1it:TransportActivityEmissions" }
-    },
-    {
-      "@id": "gs1it:wasteEmissions",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
-      "rdfs:range": { "@id": "gs1it:WasteEmissions" }
-    },
-    {
-      "@id": "gs1it:waterEmissions",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
-      "rdfs:range": { "@id": "gs1it:WaterEmissions" }
-    },
-
     {
       "@id": "gs1it:electricityCO2eEmissions",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ConsumptionEmissionsScope1And2" },
-      "rdfs:range": { "@id": "gs1it:ElectricityCO2eEmissions" }
+      "rdfs:domain": { "@id": "gs1it:EnergyConsumptionEmissions" },
+      "rdfs:range": { "@id": "gs1it:ElectricityCO2eEmissions" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:fuelCO2eEmissions",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ConsumptionEmissionsScope1And2" },
-      "rdfs:range": { "@id": "gs1it:FuelCO2eEmissions" }
+      "rdfs:domain": { "@id": "gs1it:EnergyConsumptionEmissions" },
+      "rdfs:range": { "@id": "gs1it:FuelCO2eEmissions" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:refrigerantLeaksCO2eEmissions",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ConsumptionEmissionsScope1And2" },
-      "rdfs:range": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" }
+      "rdfs:domain": { "@id": "gs1it:EnergyConsumptionEmissions" },
+      "rdfs:range": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
+      "sw:term_status": "draft"
     },
-
-    {
-      "@id": "gs1it:electricityCO2e",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ElectricityCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
-    },
-    {
-      "@id": "gs1it:electricityConsumptionDetails",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ElectricityCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:ElectricityConsumption" }
-    },
-
-    {
-      "@id": "gs1it:electricityConsumption",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ElectricityConsumption" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1it:electricityType",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:ElectricityConsumption" },
-      "rdfs:range": { "@id": "gs1it:ElectricityTypeCode" }
-    },
+    
     {
       "@id": "gs1it:electricityTypeDescription",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:ElectricityConsumption" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-
-    {
-      "@id": "gs1it:fuelCO2e",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FuelCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
-    },
-    {
-      "@id": "gs1it:fuelConsumptionDetails",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FuelCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:FuelConsumption" }
-    },
-
-    {
-      "@id": "gs1it:consumption",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FuelConsumption" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1it:fuelType",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FuelConsumption" },
-      "rdfs:range": { "@id": "gs1it:FuelTypeCode" }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:fuelTypeDescription",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:FuelConsumption" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-
-    {
-      "@id": "gs1it:refrigerantLeaksCO2e",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
-    },
-    {
-      "@id": "gs1it:refrigerantRecharged",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:RefrigerantRecharged" }
-    },
-    {
-      "@id": "gs1it:refrigerantLost",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1it:RefrigerantLost" }
-    },
-
-    {
-      "@id": "gs1it:quantityOfRefrigerantRecharged",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:RefrigerantRecharged" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1it:refrigerantType",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { 
-        "owl:unionOf": [ { "@id": "gs1it:RefrigerantRecharged" }, { "@id": "gs1it:RefrigerantLost" } ]
-      },
-      "rdfs:range": { "@id": "gs1it:RefrigerantTypeCode" }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:refrigerantTypeDescription",
@@ -539,132 +415,15 @@
       "rdfs:domain": { 
         "owl:unionOf": [ { "@id": "gs1it:RefrigerantRecharged" }, { "@id": "gs1it:RefrigerantLost" } ]
       },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1it:quantityOfRefrigerantLost",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:RefrigerantLost" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-
-    {
-      "@id": "gs1it:freightTransport",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:TransportActivityEmissions" },
-      "rdfs:range": { "@id": "gs1it:FreightTransport" }
-    },
-    {
-      "@id": "gs1it:businessTravel",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:TransportActivityEmissions" },
-      "rdfs:range": { "@id": "gs1it:BusinessTravel" }
-    },
-    {
-      "@id": "gs1it:commuting",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:TransportActivityEmissions" },
-      "rdfs:range": { "@id": "gs1it:Commuting" }
-    },
-
-    {
-      "@id": "gs1it:freightCO2e",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransport" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
-    },
-    {
-      "@id": "gs1it:fleetOfOwnedVehicles",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransport" },
-      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" }
-    },
-    {
-      "@id": "gs1it:freightTransportDetails",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransport" },
-      "rdfs:range": { "@id": "gs1it:FreightTransportDetails" }
-    },
-
-    {
-      "@id": "gs1it:typeOfFlow",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "gs1it:FlowTypeCode" }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:typeOfFlowDescription",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1it:modeOfTransport",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "gs1it:TransportModeCode" }
-    },
-    {
-      "@id": "gs1it:noJourneys",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { 
-        "owl:unionOf": [ { "@id": "gs1it:FreightTransportDetails" }, { "@id": "gs1it:BusinessTravelDetails" } ]
-      },
-      "rdfs:range": { "@id": "xsd:integer" }
-    },
-    {
-      "@id": "gs1it:averageKmPerJourney",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1it:weightTransportedPerJourney",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1it:tonnesKm",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1it:temperatureControlledTransport",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
-      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" }
-    },
-
-    {
-      "@id": "gs1it:businessTravelCO2e",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:BusinessTravel" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
-    },
-    {
-      "@id": "gs1it:companyCarFleet",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { 
-        "owl:unionOf": [ { "@id": "gs1it:BusinessTravel" }, { "@id": "gs1it:Commuting" } ]
-      },
-      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" }
-    },
-    {
-      "@id": "gs1it:businessTravelDetails",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:BusinessTravel" },
-      "rdfs:range": { "@id": "gs1it:BusinessTravelDetails" }
-    },
-
-    {
-      "@id": "gs1it:typeOfTransport",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { 
-        "owl:unionOf": [ { "@id": "gs1it:BusinessTravelDetails" }, { "@id": "gs1it:CommutingDetails" } ]
-      },
-      "rdfs:range": { "@id": "gs1it:VehicleTypeCode" }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:typeOfTransportDescription",
@@ -672,15 +431,8 @@
       "rdfs:domain": { 
         "owl:unionOf": [ { "@id": "gs1it:BusinessTravelDetails" }, { "@id": "gs1it:CommutingDetails" } ]
       },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-    {
-      "@id": "gs1it:typeOfFuel",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { 
-        "owl:unionOf": [ { "@id": "gs1it:BusinessTravelDetails" }, { "@id": "gs1it:CommutingDetails" } ]
-      },
-      "rdfs:range": { "@id": "gs1it:FuelTypeCode" }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:typeOfFuelDescription",
@@ -688,214 +440,399 @@
       "rdfs:domain": { 
         "owl:unionOf": [ { "@id": "gs1it:BusinessTravelDetails" }, { "@id": "gs1it:CommutingDetails" } ]
       },
-      "rdfs:range": { "@id": "rdf:langString" }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:wasteTypeDescription",
+      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:WasteProduction" },
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:wasteDestinationDescription",
+      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:WasteProduction" },
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
+    },
+
+    {
+      "@id": "gs1it:electricityCO2e",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ElectricityCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:electricityConsumptionDetails",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ElectricityCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:ElectricityConsumption" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:electricityConsumption",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ElectricityConsumption" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:electricityType",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ElectricityConsumption" },
+      "rdfs:range": { "@id": "gs1it:ElectricityTypeCode" },
+      "sw:term_status": "draft"
+    },
+
+    {
+      "@id": "gs1it:fuelCO2e",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FuelCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:fuelConsumptionDetails",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FuelCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:FuelConsumption" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:consumption",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FuelConsumption" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:fuelType",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FuelConsumption" },
+      "rdfs:range": { "@id": "gs1it:FuelTypeCode" },
+      "sw:term_status": "draft"
+    },
+
+    {
+      "@id": "gs1it:refrigerantLeaksCO2e",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:refrigerantRecharged",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:RefrigerantRecharged" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:refrigerantLost",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:RefrigerantLeaksCO2eEmissions" },
+      "rdfs:range": { "@id": "gs1it:RefrigerantLost" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:quantityOfRefrigerantRecharged",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:RefrigerantRecharged" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:refrigerantType",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { 
+        "owl:unionOf": [ { "@id": "gs1it:RefrigerantRecharged" }, { "@id": "gs1it:RefrigerantLost" } ]
+      },
+      "rdfs:range": { "@id": "gs1it:RefrigerantTypeCode" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:quantityOfRefrigerantLost",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:RefrigerantLost" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+
+    {
+      "@id": "gs1it:transportActivityEmissions",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
+      "rdfs:range": { "@id": "gs1it:TransportActivityEmissions" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:freightTransport",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:TransportActivityEmissions" },
+      "rdfs:range": { "@id": "gs1it:FreightTransport" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:businessTravel",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:TransportActivityEmissions" },
+      "rdfs:range": { "@id": "gs1it:BusinessTravel" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:commuting",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:TransportActivityEmissions" },
+      "rdfs:range": { "@id": "gs1it:Commuting" },
+      "sw:term_status": "draft"
+    },
+
+    {
+      "@id": "gs1it:freightCO2e",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransport" },
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:fleetOfOwnedVehicles",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransport" },
+      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:freightTransportDetails",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransport" },
+      "rdfs:range": { "@id": "gs1it:FreightTransportDetails" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:typeOfFlow",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
+      "rdfs:range": { "@id": "gs1it:FlowTypeCode" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:modeOfTransport",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
+      "rdfs:range": { "@id": "gs1it:TransportModeCode" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:noJourneys",
+      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
+      "rdfs:domain": { 
+        "owl:unionOf": [ { "@id": "gs1it:FreightTransportDetails" }, { "@id": "gs1it:BusinessTravelDetails" } ]
+      },
+      "rdfs:range": { "@id": "xsd:integer" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:averageKmPerJourney",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:weightTransportedPerJourney",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:tonnesKm",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:temperatureControlledTransport",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:FreightTransportDetails" },
+      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" },
+      "sw:term_status": "draft"
+    },
+
+    {
+      "@id": "gs1it:businessTravelCO2e",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:BusinessTravel" },
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:companyCarFleet",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { 
+        "owl:unionOf": [ { "@id": "gs1it:BusinessTravel" }, { "@id": "gs1it:Commuting" } ]
+      },
+      "rdfs:range": { "@id": "gs1:NonbinaryLogicCode" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:businessTravelDetails",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:BusinessTravel" },
+      "rdfs:range": { "@id": "gs1it:BusinessTravelDetails" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:typeOfTransport",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { 
+        "owl:unionOf": [ { "@id": "gs1it:BusinessTravelDetails" }, { "@id": "gs1it:CommutingDetails" } ]
+      },
+      "rdfs:range": { "@id": "gs1it:VehicleTypeCode" },
+      "sw:term_status": "draft"
+    },
+    {
+      "@id": "gs1it:typeOfFuel",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { 
+        "owl:unionOf": [ { "@id": "gs1it:BusinessTravelDetails" }, { "@id": "gs1it:CommutingDetails" } ]
+      },
+      "rdfs:range": { "@id": "gs1it:FuelTypeCode" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:totalKmPerYear",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:BusinessTravelDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
     },
 
     {
       "@id": "gs1it:commutingCO2e",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:Commuting" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:commutingDetails",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:Commuting" },
-      "rdfs:range": { "@id": "gs1it:CommutingDetails" }
+      "rdfs:range": { "@id": "gs1it:CommutingDetails" },
+      "sw:term_status": "draft"
     },
-
     {
       "@id": "gs1it:averageDailyKm",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:CommutingDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:noEmployees",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:CommutingDetails" },
-      "rdfs:range": { "@id": "xsd:integer" }
+      "rdfs:range": { "@id": "xsd:integer" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:averageTravellingTime",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:CommutingDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
     },
 
+    {
+      "@id": "gs1it:wasteEmissions",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
+      "rdfs:range": { "@id": "gs1it:WasteEmissions" },
+      "sw:term_status": "draft"
+    },
     {
       "@id": "gs1it:wasteProduction",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WasteEmissions" },
-      "rdfs:range": { "@id": "gs1it:WasteProduction" }
+      "rdfs:range": { "@id": "gs1it:WasteProduction" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:quantityProduced",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WasteProduction" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:emissions",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WasteProduction" },
-      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" }
+      "rdfs:range": { "@id": "gs1it:TotalCO2eEmissions" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:wasteType",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WasteProduction" },
-      "rdfs:range": { "@id": "gs1it:WasteTypeCode" }
-    },
-    {
-      "@id": "gs1it:wasteTypeDescription",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:WasteProduction" },
-      "rdfs:range": { "@id": "rdf:langString" }
+      "rdfs:range": { "@id": "gs1it:WasteTypeCode" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:wasteDestination",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WasteProduction" },
-      "rdfs:range": { "@id": "gs1it:WasteDestinationCode" }
-    },
-    {
-      "@id": "gs1it:wasteDestinationDescription",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1it:WasteProduction" },
-      "rdfs:range": { "@id": "rdf:langString" }
+      "rdfs:range": { "@id": "gs1it:WasteDestinationCode" },
+      "sw:term_status": "draft"
     },
 
+    {
+      "@id": "gs1it:waterEmissions",
+      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
+      "rdfs:domain": { "@id": "gs1it:ActualEmissions" },
+      "rdfs:range": { "@id": "gs1it:WaterEmissions" },
+      "sw:term_status": "draft"
+    },
     {
       "@id": "gs1it:waterConsumption",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WaterEmissions" },
-      "rdfs:range": { "@id": "gs1it:WaterConsumption" }
+      "rdfs:range": { "@id": "gs1it:WaterConsumption" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:waterQuantity",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WaterConsumption" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:waterType",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:WaterConsumption" },
-      "rdfs:range": { "@id": "gs1it:WaterTypeCode" }
+      "rdfs:range": { "@id": "gs1it:WaterTypeCode" },
+      "sw:term_status": "draft"
     },
 
     {
       "@id": "gs1it:totalCO2eEmissionsQuantity",
       "@type": [ "owl:ObjectProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:TotalCO2eEmissions" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
+      "rdfs:range": { "@id": "gs1:QuantitativeValue" },
+      "sw:term_status": "draft"
     },
     {
       "@id": "gs1it:calculationMethodology",
       "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
       "rdfs:domain": { "@id": "gs1it:TotalCO2eEmissions" },
-      "rdfs:range": { "@id": "rdf:langString" }
-    },
-
-    {
-      "@id": "gs1:value",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:QuantitativeValue" },
-      "rdfs:range": { "@id": "xsd:float" }
-    },
-    {
-      "@id": "gs1:measurementUnitCode",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:QuantitativeValue" },
-      "rdfs:range": { "@id": "xsd:string" }
-    },
-
-    {
-      "@id": "gs1:referencedFileURL",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:ReferencedFileDetails" },
-      "rdfs:range": { "@id": "xsd:anyURI" }
-    },
-    {
-      "@id": "gs1:fileLanguageCode",
-      "@type": [ "owl:DatatypeProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:ReferencedFileDetails" },
-      "rdfs:range": { "@id": "xsd:string" }
-    },
-    {
-      "@id": "gs1:referencedFileSize",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:ReferencedFileDetails" },
-      "rdfs:range": { "@id": "gs1:QuantitativeValue" }
-    },
-    {
-      "@id": "gs1:referencedFileType",
-      "@type": [ "owl:ObjectProperty", "rdf:Property" ],
-      "rdfs:domain": { "@id": "gs1:ReferencedFileDetails" },
-      "rdfs:range": { "@id": "gs1:ReferencedFileTypeCode" }
-    },
-
-    {
-      "@id": "gs1it:TransportModeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of transport modes." }
-    },
-    {
-      "@id": "gs1it:WaterTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of water source types." }
-    },
-    {
-      "@id": "gs1it:WasteTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of waste classifications." }
-    },
-    {
-      "@id": "gs1it:WasteDestinationCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of waste processing destinations." }
-    },
-    {
-      "@id": "gs1it:FuelTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of energy and fuel types." }
-    },
-    {
-      "@id": "gs1it:ElectricityTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of power sourcing frameworks." }
-    },
-    {
-      "@id": "gs1it:RefrigerantTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of coolants and gas components." }
-    },
-    {
-      "@id": "gs1it:FlowTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of logistical transport nodes." }
-    },
-    {
-      "@id": "gs1it:VehicleTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of passenger transport vehicle formats." }
-    },
-    {
-      "@id": "gs1:ReferencedFileTypeCode",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of metadata classifications for files." }
-    },
-    {
-      "@id": "gs1de:GreenhouseGasEmissionScopeType",
-      "@type": [ "owl:Class", "rdfs:Class" ],
-      "rdfs:comment": { "@language": "en", "@value": "Controlled list of standard Scope 1, 2, and 3 classifications." }
+      "rdfs:range": { "@id": "rdf:langString" },
+      "sw:term_status": "draft"
     }
   ]
 }

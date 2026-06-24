@@ -1,15 +1,64 @@
 {
   "@context": {
-    "gs1": "https://gs1.org/voc/",
-    "gs1de": "https://gs1de.org/voc/",
-    "gs1it": "https://gs1it.org/voc/",
+    "gs1": "https://ref.gs1.org/voc/",
+    "gs1de": "https://voc.gs1.de/",
+    "gs1it": "https://voc.gs1.it/",
     "owl": "http://www.w3.org/2002/07/owl#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dc11": "http://purl.org/dc/elements/1.1/",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "sw": "http://www.w3.org/2003/06/sw-vocab-status/ns#"
+    "schema": "http://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "sw": "http://www.w3.org/2003/06/sw-vocab-status/ns#",
+    "types": "http://rdfs.org/sioc/types#",
+    "vann": "http://purl.org/vocab/vann/",
+    "voaf": "http://purl.org/vocommons/voaf#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
   },
   "@graph": [
+    {
+      "@id": "gs1it:",
+      "@type": [
+        "voaf:Vocabulary",
+        "owl:Ontology"
+      ],
+      "schema:license": "THIS DOCUMENT IS PROVIDED \"AS IS\" WITH NO WARRANTIES WHATSOEVER, INCLUDING ANY WARRANTY OF MERCHANTABILITY, NONINFRINGMENT, FITNESS FOR PARTICULAR PURPOSE, OR ANY WARRANTY OTHERWISE ARISING OUT OF THIS SPECIFICATION. GS1 Italy disclaims all liability for any damages arising from use or misuse of this vocabulary, whether special, indirect, consequential, or compensatory damages, and including liability for infringement of any intellectual property rights, relating to use of information in or reliance upon this document. GS1 Italy retains the right to make changes to this vocabulary at any time, without notice. GS1 Italy makes no warranty for the use of this vocabulary and assumes no responsibility for any errors which may appear in the vocabulary, nor does it make a commitment to update the information contained herein.</p><p>Copyright 2026 GS1 Italy</p><p>Licensed under the Apache License, Version 2.0 (the \"License\"); you may not use this file except in compliance with the License. You may obtain a copy of the License at <a href=\"https://www.apache.org/licenses/LICENSE-2.0\" target=\"blank\">https://www.apache.org/licenses/LICENSE-2.0</a>.",
+      "dc:creator": {
+        "@id": "https://www.gs1.it/"
+      },
+      "dc:description": {
+        "@language": "en",
+        "@value": "The GS1 Italy RDF vocabulary, described using W3C RDF Schema and the Web Ontology Language. The vocabulary builds on and refers to https://schema.org/, https://ref.gs1.org/voc/ and https://voc.gs1.de/ where appropriate."
+      },
+      "dc:identifier": "GS1 Italy Web Vocabulary",
+      "dc11:title": "GS1 Italy Web Vocabulary",
+      "dc:issued": {
+        "@type": "xsd:date",
+        "@value": "2026-06-24"
+      },
+      "dc:lastModified": {
+        "@type": "xsd:date",
+        "@value": "2026-06-24"
+      },
+      "owl:versionInfo": "0.1.0",
+      "vann:preferredNamespacePrefix": "gs1it",
+      "vann:preferredNamespaceUri": {
+        "@id": "gs1it:"
+      },
+      "voaf:extends": [
+        { "@id": "schema:" },
+        { "@id": "gs1:" },
+        { "@id": "gs1de:" }
+      ],
+      "voaf:hasEquivalencesWith": {
+        "@id": "schema:"
+      },
+      "voaf:specializes": [
+        { "@id": "schema:" },
+        { "@id": "gs1:" }
+      ]
+    },
     {
       "@id": "gs1:Organization",
       "@type": [ "owl:Class", "rdfs:Class" ],
